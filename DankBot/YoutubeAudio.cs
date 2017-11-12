@@ -17,18 +17,13 @@ namespace DankBot
         /// </summary>
         /// <param name="url">Url of the video to download</param>
         /// <param name="DownloadDone">Task that executes when the video is done</param>
-        public static void Download(string url)
+        public static void Download(YouTubeVideo video)
         {
-            new Thread(() => {
-                string videoid = url.Substring(url.LastIndexOf("v=") + 2, 11);
-                Process youtubedl = new Process();
-                youtubedl.StartInfo.FileName = @"resources\utils\youtube-dl\youtube-dl.exe";
-                youtubedl.StartInfo.Arguments = $@"-o resources\utils\youtube-dl\temp\{videoid}.mp4 https://www.youtube.com/watch?v={videoid}";
-                youtubedl.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                youtubedl.Start();
-                youtubedl.WaitForExit();
-                Playlist.files.Add($@"resources\utils\youtube-dl\temp\{videoid}.mp4");//$@"resources\sounds\downloaded\{temp_filename}.mp3");
-            }).Start();
+            string videoid = video.Url.Substring(video.Url.LastIndexOf("v=") + 2, 11);
+            PlayListItem item = new PlayListItem();
+            item.Title = video.Title;
+            item.Url = video.Url;
+            Playlist.files.Add(item);
         }
     }
 }

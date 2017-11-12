@@ -27,3 +27,60 @@ d:\documents\visual studio 2017\Projects\DankBot\DankBot\bin\Debug\Microsoft.Ext
 d:\documents\visual studio 2017\Projects\DankBot\DankBot\bin\Debug\Newtonsoft.Json.xml
 d:\documents\visual studio 2017\Projects\DankBot\DankBot\bin\Debug\System.Collections.Immutable.xml
 d:\documents\visual studio 2017\Projects\DankBot\DankBot\bin\Debug\System.Interactive.Async.xml
+d:\documents\visual studio 2017\Projects\DankBot\DankBot\bin\Debug\Google.Apis.Auth.dll
+d:\documents\visual studio 2017\Projects\DankBot\DankBot\bin\Debug\Google.Apis.Auth.PlatformServices.dll
+d:\documents\visual studio 2017\Projects\DankBot\DankBot\bin\Debug\Google.Apis.Core.dll
+d:\documents\visual studio 2017\Projects\DankBot\DankBot\bin\Debug\Google.Apis.dll
+d:\documents\visual studio 2017\Projects\DankBot\DankBot\bin\Debug\Google.Apis.PlatformServices.dll
+d:\documents\visual studio 2017\Projects\DankBot\DankBot\bin\Debug\Google.Apis.YouTube.v3.dll
+d:\documents\visual studio 2017\Projects\DankBot\DankBot\bin\Debug\System.Security.Cryptography.Algorithms.dll
+d:\documents\visual studio 2017\Projects\DankBot\DankBot\bin\Debug\System.Security.Cryptography.Encoding.dll
+d:\documents\visual studio 2017\Projects\DankBot\DankBot\bin\Debug\System.Security.Cryptography.Primitives.dll
+d:\documents\visual studio 2017\Projects\DankBot\DankBot\bin\Debug\System.Security.Cryptography.X509Certificates.dll
+d:\documents\visual studio 2017\Projects\DankBot\DankBot\bin\Debug\Google.Apis.xml
+d:\documents\visual studio 2017\Projects\DankBot\DankBot\bin\Debug\Google.Apis.Auth.xml
+d:\documents\visual studio 2017\Projects\DankBot\DankBot\bin\Debug\Google.Apis.Core.xml
+d:\documents\visual studio 2017\Projects\DankBot\DankBot\bin\Debug\Google.Apis.YouTube.v3.xml
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\DankBot.exe.config
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\DankBot.exe
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\DankBot.pdb
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Discord.Net.Commands.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Discord.Net.Core.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Discord.Net.Rest.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Discord.Net.Rpc.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Discord.Net.Webhook.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Discord.Net.WebSocket.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Google.Apis.Auth.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Google.Apis.Auth.PlatformServices.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Google.Apis.Core.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Google.Apis.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Google.Apis.PlatformServices.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Google.Apis.YouTube.v3.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Microsoft.Extensions.DependencyInjection.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Newtonsoft.Json.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\System.Collections.Immutable.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\System.Interactive.Async.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\System.Runtime.InteropServices.RuntimeInformation.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\System.Security.Cryptography.Algorithms.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\System.Security.Cryptography.Encoding.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\System.Security.Cryptography.Primitives.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\System.Security.Cryptography.X509Certificates.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Discord.Net.Commands.xml
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Discord.Net.Core.xml
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Discord.Net.Rest.xml
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Discord.Net.Rpc.xml
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Discord.Net.Webhook.xml
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Discord.Net.WebSocket.xml
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Google.Apis.xml
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Google.Apis.Auth.xml
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Google.Apis.Core.xml
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Google.Apis.YouTube.v3.xml
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Microsoft.Extensions.DependencyInjection.xml
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.xml
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Newtonsoft.Json.xml
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\System.Collections.Immutable.xml
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\System.Interactive.Async.xml
+D:\Documents\GitHub\DankBot\DankBot\obj\Debug\DankBot.csprojResolveAssemblyReference.cache
+D:\Documents\GitHub\DankBot\DankBot\obj\Debug\DankBot.exe
+D:\Documents\GitHub\DankBot\DankBot\obj\Debug\DankBot.pdb
