@@ -18,7 +18,6 @@ namespace DankBot
 
         static void Main(string[] args)
         {
-            GoogleHelper.Search("wikipedia");
             BotMain().Wait();
         }
 
