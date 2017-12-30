@@ -14,7 +14,7 @@ namespace DankBot
     class Program
     {
 
-        static DiscordSocketClient client = new DiscordSocketClient();
+        public static DiscordSocketClient client = new DiscordSocketClient();
 
         static void Main(string[] args)
         {
@@ -40,7 +40,7 @@ namespace DankBot
             Logger.Write("Starting discord client...  ");
             try
             {
-                await client.LoginAsync(TokenType.Bot, ConfigUtils.Configuration.BotToken);
+                await client.LoginAsync(TokenType.User, ConfigUtils.Configuration.BotToken);
                 await client.StartAsync();
                 await client.SetStatusAsync(UserStatus.Online);
                 Logger.OK();
@@ -81,15 +81,38 @@ namespace DankBot
                 Thread.Sleep(1000);
         }
 
-        
+        public static List<string> coolDowns = new List<string>();
 
         static async Task MessageReceived(SocketMessage message)
-        { 
-            if (message.Content.StartsWith("!") && message.Author.Username != "xX_WhatsTheGeek_Xx")
+        {
+            
+            if (message.Author.Username == "DankBot")
+            {
+                return;
+            }
+            if (message.Content.ToUpper().Contains("TRAPS AREN'T GAY"))
+            {
+                await message.Channel.SendMessageAsync($"STFU {message.Author.Mention}");
+                return;
+            }
+
+            if (!message.Content.StartsWith(ConfigUtils.Configuration.Prefix))
             {
                 //await message.Channel.SendMessageAsync("Nique ta race !");
-                //return;
+                return;
             }
+
+            if (coolDowns.Contains(message.Author.Mention))
+            {
+                await message.Channel.SendMessageAsync($"Calm the fuck down {message.Author.Mention} !");
+                return;
+            }
+            else
+            {
+                coolDowns.Add(message.Author.Mention);
+                new Task(() => removeCooldown(message.Author.Mention)).Start();
+            }
+
             if (message.Content.StartsWith(ConfigUtils.Configuration.Prefix))
             {
                 string msg = message.Content.Substring(ConfigUtils.Configuration.Prefix.Length);
@@ -111,7 +134,7 @@ namespace DankBot
                         await message.Channel.SendMessageAsync("I'm not ur dank calculator asshole !");
                         break;
                     case "GOOGLE":
-                        await message.Channel.SendMessageAsync($"https://www.google.fr/search?q={msg.Substring(7).Replace(' ','+')}");
+                        await message.Channel.SendMessageAsync($"https://www.google.fr/search?q={msg.Substring(7).Replace(' ', '+')}");
                         break;
                     case "PENIS":
                         await message.Channel.SendMessageAsync("8================================-");
@@ -163,7 +186,7 @@ namespace DankBot
                     case "STOP":
                         //await message.Channel.SendMessageAsync($":white_check_mark: `Have a dank day m8 !`");
                         //Disconnect().Start();
-                        await message.Channel.SendMessageAsync($":white_check_mark: `I DON'T THINK SO...`");
+                        await message.Channel.SendMessageAsync($":no_entry: `I DON'T THINK SO...`");
                         break;
                     case "SETGAME":
                         try
@@ -172,12 +195,16 @@ namespace DankBot
                             {
                                 string game = msg.Substring(8);
                                 await client.SetGameAsync(game);
-                                Logger.WriteLine($"Game set to '{game}' successfully !", ConsoleColor.Green);
+                                ConfigUtils.Configuration.Playing = game;
+                                ConfigUtils.Save(@"resources\config\config.json");
+                                await message.Channel.SendMessageAsync($":white_check_mark: `The game is now '{game}'`");
                             }
                             else
                             {
                                 await client.SetGameAsync("");
-                                Logger.WriteLine("Cleared game successfully !", ConsoleColor.Green);
+                                ConfigUtils.Configuration.Playing = "";
+                                ConfigUtils.Save(@"resources\config\config.json");
+                                await message.Channel.SendMessageAsync($":white_check_mark: `The game has been reset !`");
                             }
                         }
                         catch (Exception ex)
@@ -186,6 +213,8 @@ namespace DankBot
                         }
                         break;
                     case "SETPREFIX":
+                        await message.Channel.SendMessageAsync($":no_entry: `Could not change the dank prefix :/`");
+                        break;
                         try
                         {
                             if (arg.Count() > 1)
@@ -219,6 +248,8 @@ namespace DankBot
                         }
                         break;
                     case "RESET":
+                        await message.Channel.SendMessageAsync($":no_entry: `Could not reload the configuration :/`");
+                        break;
                         try
                         {
                             ConfigUtils.SetDefaults();
@@ -243,6 +274,10 @@ namespace DankBot
                     case "PLAYLIST":
                         string response = "```";
                         int i = 1;
+                        if (Playlist.Loop)
+                        {
+                            response += "(LOOP MODE ENABLED)\n";
+                        }
                         if (Playlist.files.Count == 0)
                         {
                             await message.Channel.SendMessageAsync($":no_entry: `There are currently no songs in the playlist :/`");
@@ -254,6 +289,25 @@ namespace DankBot
                             i++;
                         }
                         await message.Channel.SendMessageAsync($"{response}```");
+                        break;
+                    case "LOOP":
+                        Playlist.Loop = !Playlist.Loop;
+                        if (Playlist.Loop)
+                        {
+                            await message.Channel.SendMessageAsync($":white_check_mark: `Loop mode enabled`");
+                            if (Playlist.files.Count > 0)
+                            {
+                                await client.SetGameAsync($"(Loop) {Playlist.files[0].Title}");
+                            }
+                        }
+                        else
+                        {
+                            await message.Channel.SendMessageAsync($":white_check_mark: `Loop mode disabled`");
+                            if (Playlist.files.Count > 0)
+                            {
+                                await client.SetGameAsync(Playlist.files[0].Title);
+                            }
+                        }
                         break;
                     case "REMOVE":
                         try
@@ -268,7 +322,19 @@ namespace DankBot
                         }
                         catch
                         {
-                            await message.Channel.SendMessageAsync($":no_entry: `Invalid song id`:thinking:");
+                            await message.Channel.SendMessageAsync($":no_entry: `Invalid song id` :thinking:");
+                        }
+                        break;
+                    case "RNG":
+                        try
+                        {
+                            int max = int.Parse(msg.Substring(3));
+                            Random rng = new Random();
+                            await message.Channel.SendMessageAsync($":white_check_mark: `{rng.Next(max + 1)}`");
+                        }
+                        catch
+                        {
+                            await message.Channel.SendMessageAsync($":no_entry: `Invalid number` :joy:");
                         }
                         break;
                     case "SE":
@@ -305,6 +371,18 @@ namespace DankBot
                                         case "OOF":
                                             file = @"resources\sounds\oof.wav";
                                             break;
+                                        case "EOOF":
+                                            file = @"resources\sounds\eoof.wav";
+                                            break;
+                                        case "MISSIONFAILED":
+                                            file = @"resources\sounds\missionfailed.wav";
+                                            break;
+                                        case "TRIGGERED":
+                                            file = @"resources\sounds\triggered.wav";
+                                            break;
+                                        case "JEFF":
+                                            file = @"resources\sounds\jeff.wav";
+                                            break;
                                         default:
                                             await message.Channel.SendMessageAsync($":no_entry: `I don't know this sound effect m8...`");
                                             break;
@@ -322,7 +400,14 @@ namespace DankBot
                                                 Playlist.Enable();
                                                 new Thread(() =>
                                                 {
-                                                    Playlist.JoinChannel(achannel).Wait();
+                                                    try
+                                                    {
+                                                        Playlist.JoinChannel(achannel).Wait();
+                                                    }
+                                                    catch
+                                                    {
+
+                                                    }
                                                 }).Start();
                                             }
                                             else
@@ -362,6 +447,9 @@ namespace DankBot
                     case "PLZHALP":
                         await message.Channel.SendFileAsync(@"resources\config\help.txt");
                         break;
+                    case "PI":
+                        await message.Channel.SendMessageAsync("`PI = 3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679821480865132823066470938446095505822317253594081284811174502841027019385211055596446229489549303819644288109756659334461284756482337867831652712019091456485669234603486104543266482133936072602491412737245870066063155881748815209209628292540917153643678925903600113305305488204665213841469519415116094330572703657595919530921861173819326117931051185480744623799627495673518857527248912279381830119491298336733624406566430860213949463952247371907021798609437027705392171762931767523846748184676694051320005681271452635608277857713427577896091736371787214684409012249534301465495853710507922796892589235420199561121290219608640344181598136297747713099605187072113499999983729780499510597317328160963185950244594553469083026425223082533446850352619311881710100031378387528865875332083814206171776691473035982534904287554687311595628638823537875937519577818577805321712268066130019278766111959092164201989`");
+                        break;
                     case "DEBUG":
                         await message.Channel.SendMessageAsync(YouTubeHelper.Search(msg.Substring(6)).Url);
                         break;
@@ -370,6 +458,12 @@ namespace DankBot
                         break;
                 }
             }
+        }
+
+        static void removeCooldown(string user)
+        {
+            Thread.Sleep(2000);
+            coolDowns.Remove(user);
         }
 
         static async Task Disconnect()
@@ -406,6 +500,7 @@ namespace DankBot
         static void Panic(string error)
         {
             Logger.WriteLine($"Error: {error}", ConsoleColor.Red);
+            Console.ReadLine();
             Environment.Exit(1);
         }
     }

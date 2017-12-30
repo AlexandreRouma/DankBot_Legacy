@@ -20,6 +20,7 @@ namespace DankBot
         private static bool playing = false;
         public static bool Enabled = false;
         public static bool Skipped = false;
+        public static bool Loop = false;
 
         public static async Task JoinChannel(IAudioChannel channel)
         {
@@ -69,14 +70,26 @@ namespace DankBot
             {
                 while (files.Count() > 0 && Enabled)
                 {
+                    if (Loop)
+                    {
+                        Program.client.SetGameAsync($"(Loop) {files[0].Title}").Wait();
+                    }
+                    else
+                    {
+                        Program.client.SetGameAsync(files[0].Title).Wait();
+                    }
                     SendAsync(files[0]);
                     playing = true;
                     if (!ffmpeg.HasExited)
                         ffmpeg.Kill();
                     ffmpeg.WaitForExit();
-                    files.RemoveAt(0);
+                    if (!Loop)
+                    {
+                        files.RemoveAt(0);
+                    }
                     if (files.Count == 0)
                     {
+                        Program.client.SetGameAsync(ConfigUtils.Configuration.Playing).Wait();
                         SendFileAsync(@"resources\sounds\playlist_done.wav");
                         Disable();
                     }

@@ -1,4 +1,4 @@
-╔═══════════╦════════════════════╦═════════════════════════════════════════════════════════════════════╗
+﻿╔═══════════╦════════════════════╦═════════════════════════════════════════════════════════════════════╗
 ║   Name    ║       Usage        ║                             Desciption                              ║
 ╠═══════════╬════════════════════╬═════════════════════════════════════════════════════════════════════╣
 ║ ping      ║ ping               ║ Executing this command will ask the bot to respond with a message   ║
@@ -19,4 +19,23 @@
 ║ setprefix ║ setprefix [prefix] ║ Set the prefix for the bot to use                                   ║
 ║ reload    ║ reload             ║ Reload the config file                                              ║
 ║ reset     ║ reset              ║ Resets the configuration file                                       ║
+║ loop      ║ loop               ║ Enable loop mode for playlist                                       ║
+║ rng       ║ rng [max]          ║ Displays a random number between 0 and MAX                          ║
 ╚═══════════╩════════════════════╩═════════════════════════════════════════════════════════════════════╝
+╔═══════════════╗
+║ Sound Effects ║
+╠═══════════════╣
+║ AIRHORN       ║
+║ TRIPLE        ║
+║ WRONGNUMBER   ║
+║ OOOHHH        ║
+║ GUNSHOT       ║
+║ FAIL          ║
+║ FUCKTHISSHIT  ║
+║ OOF           ║
+║ EOOF          ║
+║ MISSIONFAILED ║
+║ TRIGGERED     ║
+║ JEFF          ║
+╚═══════════════╝
+
