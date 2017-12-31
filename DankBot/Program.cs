@@ -85,7 +85,10 @@ namespace DankBot
 
         static async Task MessageReceived(SocketMessage message)
         {
-            
+            if (message.Channel.Name != "bot-commands")
+            {
+                return;
+            }
             if (message.Author.Username == "DankBot")
             {
                 return;
