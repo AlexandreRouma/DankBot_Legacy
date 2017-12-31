@@ -8,6 +8,8 @@ using Discord.WebSocket;
 using System.Threading;
 using System.Configuration;
 using System.IO;
+using System.Net;
+using System.Drawing;
 
 namespace DankBot
 {
@@ -470,8 +472,41 @@ namespace DankBot
                     case "PI":
                         await message.Channel.SendMessageAsync("`PI = 3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679821480865132823066470938446095505822317253594081284811174502841027019385211055596446229489549303819644288109756659334461284756482337867831652712019091456485669234603486104543266482133936072602491412737245870066063155881748815209209628292540917153643678925903600113305305488204665213841469519415116094330572703657595919530921861173819326117931051185480744623799627495673518857527248912279381830119491298336733624406566430860213949463952247371907021798609437027705392171762931767523846748184676694051320005681271452635608277857713427577896091736371787214684409012249534301465495853710507922796892589235420199561121290219608640344181598136297747713099605187072113499999983729780499510597317328160963185950244594553469083026425223082533446850352619311881710100031378387528865875332083814206171776691473035982534904287554687311595628638823537875937519577818577805321712268066130019278766111959092164201989`");
                         break;
+                    case "HSGTF":
+                        string imgLink = "";
+                        if (arg.Count() > 1)
+                        {
+                            imgLink = msg.Substring(6);
+                        }
+                        else
+                        {
+                            imgLink = await ImageHelper.GetLastImageAsync(message);
+                        }
+                        if (imgLink == "")
+                        {
+                            await message.Channel.SendMessageAsync($":no_entry: `Sorry, I can't find any image :/`");
+                            return;
+                        }
+                        new Thread(() => HsgtfTask(message, imgLink)).Start();
+                        break;
+                    case "WTH":
+                        if (arg.Count() > 1)
+                        {
+                            imgLink = msg.Substring(6);
+                        }
+                        else
+                        {
+                            imgLink = await ImageHelper.GetLastImageAsync(message);
+                        }
+                        if (imgLink == "")
+                        {
+                            await message.Channel.SendMessageAsync($":no_entry: `Sorry, I can't find any image :/`");
+                            return;
+                        }
+                        new Thread(() => WthTask(message, imgLink)).Start();
+                        break;
                     case "DEBUG":
-                        await message.Channel.SendMessageAsync(YouTubeHelper.Search(msg.Substring(6)).Url);
+                        
                         break;
                     default:
                         await message.Channel.SendMessageAsync($":no_entry: `The command '{cmd}' is as legit as an OpticGaming player on this server :(`");
@@ -480,10 +515,39 @@ namespace DankBot
             }
         }
 
+        static void HsgtfTask(SocketMessage message, string imgLink)
+        {
+            Bitmap img = (Bitmap)System.Drawing.Image.FromStream(new MemoryStream(new WebClient().DownloadData(imgLink)));
+            string filename = Convert.ToBase64String(Encoding.Default.GetBytes(GetSalt() + imgLink.Substring(0, 16))).Replace("/","_") + ".png";
+            ImageHelper.HSGTF(img).Save(filename);
+            message.Channel.SendFileAsync(filename).Wait();
+            File.Delete(filename);
+        }
+
+        static void WthTask(SocketMessage message, string imgLink)
+        {
+            Bitmap img = (Bitmap)System.Drawing.Image.FromStream(new MemoryStream(new WebClient().DownloadData(imgLink)));
+            string filename = Convert.ToBase64String(Encoding.Default.GetBytes(GetSalt() + imgLink.Substring(0, 16))).Replace("/", "_") + ".png";
+            ImageHelper.WTH(img).Save(filename);
+            message.Channel.SendFileAsync(filename).Wait();
+            File.Delete(filename);
+        }
+
         static void removeCooldown(string user)
         {
             Thread.Sleep(2000);
             coolDowns.Remove(user);
+        }
+
+        static string GetSalt()
+        {
+            Random rng = new Random();
+            string str = "";
+            for (int i = 0; i < 10; i++)
+            {
+                str += (char)rng.Next(65, 128);
+            }
+            return str;
         }
 
         static async Task Disconnect()

@@ -88,6 +88,7 @@
     </Reference>
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Interactive.Async, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Interactive.Async.3.1.1\lib\net45\System.Interactive.Async.dll</HintPath>
     </Reference>
@@ -118,6 +119,7 @@
   <ItemGroup>
     <Compile Include="Config.cs" />
     <Compile Include="GoogleHelper.cs" />
+    <Compile Include="ImageHelper.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Playlist.cs" />
     <Compile Include="Program.cs" />
