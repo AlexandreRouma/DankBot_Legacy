@@ -136,8 +136,16 @@ namespace DankBot
                     case "GOOGLE":
                         await message.Channel.SendMessageAsync($"https://www.google.fr/search?q={msg.Substring(7).Replace(' ', '+')}");
                         break;
+                    case "D0g3":
+                        await message.Channel.SendMessageAsync("░░░░░░░█▐▓▓░████▄▄▄█▀▄▓▓▓▌█\n░░░░░▄█▌▀▄▓▓▄▄▄▄▀▀▀▄▓▓▓▓▓▌█\n░░░▄█▀▀▄▓█▓▓▓▓▓▓▓▓▓▓▓▓▀░▓▌█\n░░█▀▄▓▓▓███▓▓▓███▓▓▓▄░░▄▓▐█▌\n░█▌▓▓▓▀▀▓▓▓▓███▓▓▓▓▓▓▓▄▀▓▓▐█\n▐█▐██▐░▄▓▓▓▓▓▀▄░▀▓▓▓▓▓▓▓▓▓▌█▌\n█▌███▓▓▓▓▓▓▓▓▐░░▄▓▓███▓▓▓▄▀▐█\n█▐█▓▀░░▀▓▓▓▓▓▓▓▓▓██████▓▓▓▓▐█\n▌▓▄▌▀░▀░▐▀█▄▓▓██████████▓▓▓▌█▌\n▌▓▓▓▄▄▀▀▓▓▓▀▓▓▓▓▓▓▓▓█▓█▓█▓▓▌█▌\n█▐▓▓▓▓▓▓▄▄▄▓▓▓▓▓▓█▓█▓█▓█▓▓▓▐█");
+                        break;
+                    case "guymasturbatingonwahmen":
+                        await message.Channel.SendMessageAsync(":point_up:️             :man:\n     :bug::zzz::necktie: :bug:\n                    :fuelpump:️     :boot:\n                :zap:️ 8==:punch: =D:sweat_drops:\n             :trumpet:   :eggplant:                      :sweat_drops:\n            :boot:      :boot:                       :ok_woman::skin-tone-1:");
+                        break;
+                    case "thanking":
+                        await message.Channel.SendMessageAsync("⠰⡿⠿⠛⠛⠻⠿⣷\n      ⣀⣄⡀⠀⠀⠀⠀⢀⣀⣀⣤⣄⣀⡀\n     ⢸⣿⣿⣷⠀⠀⠀⠀⠛⠛⣿⣿⣿⡛⠿⠷\n     ⠘⠿⠿⠋⠀⠀⠀⠀⠀⠀⣿⣿⣿⠇\n               ⠈⠉⠁\n \n    ⣿⣷⣄⠀⢶⣶⣷⣶⣶⣤⣀\n    ⣿⣿⣿⠀⠀⠀⠀⠀⠈⠙⠻⠗\n   ⣰⣿⣿⣿⠀⠀⠀⠀⢀⣀⣠⣤⣴⣶⡄\n ⣠⣾⣿⣿⣿⣥⣶⣶⣿⣿⣿⣿⣿⠿⠿⠛⠃\n⢰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡄\n⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡁\n⠈⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠁\n  ⠛⢿⣿⣿⣿⣿⣿⣿⡿⠟\n     ⠉⠉⠉");
                     case "PENIS":
-                        await message.Channel.SendMessageAsync("8================================-");
+                        await message.Channel.SendMessageAsync("8================================>");
                         break;
                     case "SUICIDE":
                         await message.Channel.SendFileAsync("resources/images/nooseman.png");
