@@ -475,7 +475,8 @@ namespace DankBot
                     case "AVATAR":
                         if (message.MentionedUsers.Count() > 0)
                         {
-                            await message.Channel.SendMessageAsync(message.MentionedUsers.FirstOrDefault().GetAvatarUrl(ImageFormat.Png, 1024));
+
+                            await message.Channel.SendMessageAsync(message.MentionedUsers.FirstOrDefault().GetAvatarUrl(ImageFormat.Png, 1024).TrimEnd("?size=1024".ToCharArray()));
                         }
                         else
                         {
@@ -571,7 +572,9 @@ namespace DankBot
 
         static void UsoabTask(SocketMessage message, string imgLink)
         {
-            Bitmap img = (Bitmap)System.Drawing.Image.FromStream(new MemoryStream(new WebClient().DownloadData(imgLink)));
+            byte[] file = new WebClient().DownloadData(imgLink);
+            Bitmap img = (Bitmap)System.Drawing.Image.FromStream(new MemoryStream(file));
+            img.Save("DEBUG.png");
             string filename = $@"cache\{Convert.ToBase64String(Encoding.Default.GetBytes(GetSalt() + imgLink.Substring(0, 16))).Replace("/", "_")}.png";
             ImageHelper.USOAB(img).Save(filename);
             message.Channel.SendFileAsync(filename).Wait();

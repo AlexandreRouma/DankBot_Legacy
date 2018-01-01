@@ -41,8 +41,8 @@ namespace DankBot
 
         public static Size GetNewSize(int maxWidth, int maxHeight, Bitmap bmp)
         {
-            float nw = 0;
-            float nh = 0;
+            float nw = bmp.Width;
+            float nh = bmp.Height;
 
             if (bmp.Width > maxWidth && bmp.Height > maxHeight)
             {
