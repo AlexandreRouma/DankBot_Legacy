@@ -472,6 +472,26 @@ namespace DankBot
                     case "PI":
                         await message.Channel.SendMessageAsync("`PI = 3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679821480865132823066470938446095505822317253594081284811174502841027019385211055596446229489549303819644288109756659334461284756482337867831652712019091456485669234603486104543266482133936072602491412737245870066063155881748815209209628292540917153643678925903600113305305488204665213841469519415116094330572703657595919530921861173819326117931051185480744623799627495673518857527248912279381830119491298336733624406566430860213949463952247371907021798609437027705392171762931767523846748184676694051320005681271452635608277857713427577896091736371787214684409012249534301465495853710507922796892589235420199561121290219608640344181598136297747713099605187072113499999983729780499510597317328160963185950244594553469083026425223082533446850352619311881710100031378387528865875332083814206171776691473035982534904287554687311595628638823537875937519577818577805321712268066130019278766111959092164201989`");
                         break;
+                    case "AVATAR":
+                        if (message.MentionedUsers.Count() > 0)
+                        {
+                            await message.Channel.SendMessageAsync(message.MentionedUsers.FirstOrDefault().GetAvatarUrl(ImageFormat.Png, 1024));
+                        }
+                        else
+                        {
+                            await message.Channel.SendMessageAsync($":no_entry: `Please tell me which user you want the avatar from...`");
+                        }
+                        break;
+                    case "USERINFO":
+                        if (message.MentionedUsers.Count() > 0)
+                        {
+                            message.MentionedUsers.FirstOrDefault();
+                        }
+                        else
+                        {
+                            await message.Channel.SendMessageAsync($":no_entry: `Please tell me which user you want the info from...`");
+                        }
+                        break;
                     case "HSGTF":
                         string imgLink = "";
                         if (arg.Count() > 1)
@@ -505,6 +525,22 @@ namespace DankBot
                         }
                         new Thread(() => WthTask(message, imgLink)).Start();
                         break;
+                    case "USOAB":
+                        if (arg.Count() > 1)
+                        {
+                            imgLink = msg.Substring(6);
+                        }
+                        else
+                        {
+                            imgLink = await ImageHelper.GetLastImageAsync(message);
+                        }
+                        if (imgLink == "")
+                        {
+                            await message.Channel.SendMessageAsync($":no_entry: `Sorry, I can't find any image :/`");
+                            return;
+                        }
+                        new Thread(() => UsoabTask(message, imgLink)).Start();
+                        break;
                     case "DEBUG":
                         
                         break;
@@ -518,7 +554,7 @@ namespace DankBot
         static void HsgtfTask(SocketMessage message, string imgLink)
         {
             Bitmap img = (Bitmap)System.Drawing.Image.FromStream(new MemoryStream(new WebClient().DownloadData(imgLink)));
-            string filename = Convert.ToBase64String(Encoding.Default.GetBytes(GetSalt() + imgLink.Substring(0, 16))).Replace("/","_") + ".png";
+            string filename = $@"cache\{Convert.ToBase64String(Encoding.Default.GetBytes(GetSalt() + imgLink.Substring(0, 16))).Replace("/", "_")}.png";
             ImageHelper.HSGTF(img).Save(filename);
             message.Channel.SendFileAsync(filename).Wait();
             File.Delete(filename);
@@ -527,8 +563,17 @@ namespace DankBot
         static void WthTask(SocketMessage message, string imgLink)
         {
             Bitmap img = (Bitmap)System.Drawing.Image.FromStream(new MemoryStream(new WebClient().DownloadData(imgLink)));
-            string filename = Convert.ToBase64String(Encoding.Default.GetBytes(GetSalt() + imgLink.Substring(0, 16))).Replace("/", "_") + ".png";
+            string filename = $@"cache\{Convert.ToBase64String(Encoding.Default.GetBytes(GetSalt() + imgLink.Substring(0, 16))).Replace("/", "_")}.png";
             ImageHelper.WTH(img).Save(filename);
+            message.Channel.SendFileAsync(filename).Wait();
+            File.Delete(filename);
+        }
+
+        static void UsoabTask(SocketMessage message, string imgLink)
+        {
+            Bitmap img = (Bitmap)System.Drawing.Image.FromStream(new MemoryStream(new WebClient().DownloadData(imgLink)));
+            string filename = $@"cache\{Convert.ToBase64String(Encoding.Default.GetBytes(GetSalt() + imgLink.Substring(0, 16))).Replace("/", "_")}.png";
+            ImageHelper.USOAB(img).Save(filename);
             message.Channel.SendFileAsync(filename).Wait();
             File.Delete(filename);
         }

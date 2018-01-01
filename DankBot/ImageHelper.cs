@@ -29,7 +29,7 @@ namespace DankBot
                 {
                     foreach (IEmbed a in ms.Embeds)
                     {
-                        if (a.Url.EndsWith(".png") || a.Url.EndsWith(".jpg") || a.Url.EndsWith(".bmp"))
+                        if (a.Url.Contains(".png") || a.Url.Contains(".jpg") || a.Url.Contains(".bmp"))
                         {
                             return a.Url;
                         }
@@ -89,6 +89,17 @@ namespace DankBot
             Size newSize = GetNewSize(158, 177, bmp);
 
             g.DrawImage(bmp, 79 - (newSize.Width / 2) + 42, 29 +  88 - (newSize.Height / 2), newSize.Width, newSize.Height);
+            return (Bitmap)img;
+        }
+
+        public static Bitmap USOAB(Bitmap bmp)
+        {
+            System.Drawing.Image img = System.Drawing.Image.FromFile(@"resources\images\usoab.png");
+            Graphics g = Graphics.FromImage(img);
+
+            Size newSize = GetNewSize(285, 416, bmp);
+
+            g.DrawImage(bmp, 142 - (newSize.Width / 2) + 26, 208 - (newSize.Height / 2) + 14, newSize.Width, newSize.Height);
             return (Bitmap)img;
         }
     }
