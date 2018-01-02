@@ -72,7 +72,7 @@ namespace DankBot
 
         public static Bitmap HSGTF(Bitmap bmp)
         {
-            System.Drawing.Image img = System.Drawing.Image.FromFile(@"resources\images\hsgtf.jpg");
+            System.Drawing.Image img = System.Drawing.Image.FromFile(@"resources\images\hsgtf.png");
             Graphics g = Graphics.FromImage(img);
 
             Size newSize = GetNewSize(600, 392, bmp);
@@ -83,7 +83,7 @@ namespace DankBot
 
         public static Bitmap WTH(Bitmap bmp)
         {
-            System.Drawing.Image img = System.Drawing.Image.FromFile(@"resources\images\wth.jpg");
+            System.Drawing.Image img = System.Drawing.Image.FromFile(@"resources\images\wth.png");
             Graphics g = Graphics.FromImage(img);
 
             Size newSize = GetNewSize(158, 177, bmp);

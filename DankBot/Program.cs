@@ -574,7 +574,6 @@ namespace DankBot
         {
             byte[] file = new WebClient().DownloadData(imgLink);
             Bitmap img = (Bitmap)System.Drawing.Image.FromStream(new MemoryStream(file));
-            img.Save("DEBUG.png");
             string filename = $@"cache\{Convert.ToBase64String(Encoding.Default.GetBytes(GetSalt() + imgLink.Substring(0, 16))).Replace("/", "_")}.png";
             ImageHelper.USOAB(img).Save(filename);
             message.Channel.SendFileAsync(filename).Wait();
