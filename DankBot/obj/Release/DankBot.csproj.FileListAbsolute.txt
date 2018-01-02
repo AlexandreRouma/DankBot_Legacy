@@ -27,3 +27,46 @@ D:\Documents\Visual Studio 2017\Projects\DankBot\DankBot\bin\Release\System.Inte
 D:\Documents\Visual Studio 2017\Projects\DankBot\DankBot\obj\Release\DankBot.csprojResolveAssemblyReference.cache
 D:\Documents\Visual Studio 2017\Projects\DankBot\DankBot\obj\Release\DankBot.exe
 D:\Documents\Visual Studio 2017\Projects\DankBot\DankBot\obj\Release\DankBot.pdb
+D:\Documents\GitHub\DankBot\DankBot\bin\Release\DankBot.exe.config
+D:\Documents\GitHub\DankBot\DankBot\bin\Release\DankBot.exe
+D:\Documents\GitHub\DankBot\DankBot\bin\Release\DankBot.pdb
+D:\Documents\GitHub\DankBot\DankBot\bin\Release\Discord.Net.Commands.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Release\Discord.Net.Core.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Release\Discord.Net.Rest.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Release\Discord.Net.Rpc.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Release\Discord.Net.Webhook.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Release\Discord.Net.WebSocket.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Release\Google.Apis.Auth.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Release\Google.Apis.Auth.PlatformServices.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Release\Google.Apis.Core.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Release\Google.Apis.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Release\Google.Apis.PlatformServices.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Release\Google.Apis.YouTube.v3.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Release\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Release\Microsoft.Extensions.DependencyInjection.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Release\Newtonsoft.Json.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Release\System.Collections.Immutable.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Release\System.Interactive.Async.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Release\System.Runtime.InteropServices.RuntimeInformation.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Release\System.Security.Cryptography.Algorithms.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Release\System.Security.Cryptography.Encoding.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Release\System.Security.Cryptography.Primitives.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Release\System.Security.Cryptography.X509Certificates.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Release\Discord.Net.Commands.xml
+D:\Documents\GitHub\DankBot\DankBot\bin\Release\Discord.Net.Core.xml
+D:\Documents\GitHub\DankBot\DankBot\bin\Release\Discord.Net.Rest.xml
+D:\Documents\GitHub\DankBot\DankBot\bin\Release\Discord.Net.Rpc.xml
+D:\Documents\GitHub\DankBot\DankBot\bin\Release\Discord.Net.Webhook.xml
+D:\Documents\GitHub\DankBot\DankBot\bin\Release\Discord.Net.WebSocket.xml
+D:\Documents\GitHub\DankBot\DankBot\bin\Release\Google.Apis.xml
+D:\Documents\GitHub\DankBot\DankBot\bin\Release\Google.Apis.Auth.xml
+D:\Documents\GitHub\DankBot\DankBot\bin\Release\Google.Apis.Core.xml
+D:\Documents\GitHub\DankBot\DankBot\bin\Release\Google.Apis.YouTube.v3.xml
+D:\Documents\GitHub\DankBot\DankBot\bin\Release\Microsoft.Extensions.DependencyInjection.xml
+D:\Documents\GitHub\DankBot\DankBot\bin\Release\Microsoft.Extensions.DependencyInjection.Abstractions.xml
+D:\Documents\GitHub\DankBot\DankBot\bin\Release\Newtonsoft.Json.xml
+D:\Documents\GitHub\DankBot\DankBot\bin\Release\System.Collections.Immutable.xml
+D:\Documents\GitHub\DankBot\DankBot\bin\Release\System.Interactive.Async.xml
+D:\Documents\GitHub\DankBot\DankBot\obj\Release\DankBot.csprojResolveAssemblyReference.cache
+D:\Documents\GitHub\DankBot\DankBot\obj\Release\DankBot.exe
+D:\Documents\GitHub\DankBot\DankBot\obj\Release\DankBot.pdb
