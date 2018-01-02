@@ -105,12 +105,6 @@ namespace DankBot
                 return;
             }
 
-            if (!message.Content.StartsWith(ConfigUtils.Configuration.Prefix))
-            {
-                //await message.Channel.SendMessageAsync("Nique ta race !");
-                return;
-            }
-
             if (coolDowns.Contains(message.Author.Mention))
             {
                 await message.Channel.SendMessageAsync($"Calm the fuck down {message.Author.Mention} !");
