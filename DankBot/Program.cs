@@ -224,13 +224,13 @@ namespace DankBot
                         if (!Playlist.SkipVotes.Contains(message.Author.Id))
                         {
                             Playlist.SkipVotes.Add(message.Author.Id);
-                            if (Playlist.SkipVotes.Count() > await schannel.GetUsersAsync().Count())
+                            if (Playlist.SkipVotes.Count() > (await schannel.GetUsersAsync().Count()) / 2)
                             {
                                 Playlist.Skip();
                             }
                             else
                             {
-                                await message.Channel.SendMessageAsync($":white_check_mark: `'Your vote has been added. {await schannel.GetUsersAsync().Count() - Playlist.SkipVotes.Count()} more votes needed`");
+                                await message.Channel.SendMessageAsync($":white_check_mark: `'Your vote has been added. {(await schannel.GetUsersAsync().Count()) / 2 - Playlist.SkipVotes.Count()} more votes needed`");
                             }
                         }
                         else
