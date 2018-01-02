@@ -370,7 +370,7 @@ namespace DankBot
                                     switch (msg.Split(' ')[1].ToUpper())
                                     {
                                         case "AIRHORN":
-                                            file = @"resources\sounds\playlist_skip.wav";
+                                            file = @"resources\sounds\airhorn.wav";
                                             break;
                                         case "TRIPLE":
                                             file = @"resources\sounds\triple.wav";
@@ -492,6 +492,9 @@ namespace DankBot
                         {
                             await message.Channel.SendMessageAsync($":no_entry: `Please tell me which user you want the info from...`");
                         }
+                        break;
+                    case "WTF":
+                        await message.Channel.SendFileAsync(@"resources\images\wtf.png");
                         break;
                     case "HSGTF":
                         string imgLink = "";

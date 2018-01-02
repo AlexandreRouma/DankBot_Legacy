@@ -96,7 +96,7 @@ namespace DankBot
                     else if (Skipped)
                     {
                         Skipped = false;
-                        SendFileAsync(@"resources\sounds\playlist_skip.wav");
+                        SendFileAsync(@"resources\sounds\airhorn.wav");
                     }
                 }
                 Thread.Sleep(100);
