@@ -65,8 +65,10 @@ namespace DankBot
             playing = false;
             if (youtubedlThread != null)
                 youtubedlThread.Abort();
-            sendingThread.Abort();
-            client.StopAsync().Wait();
+            if (sendingThread != null)
+                sendingThread.Abort();
+            if (client != null)
+                client.StopAsync().Wait();
             if (client != null)
                 client.Dispose();
             Enabled = false;

@@ -108,7 +108,7 @@ namespace DankBot
             {
                 return;
             }
-            if (message.Author.Username == "DankBot")
+            if (message.Author.Id == client.CurrentUser.Id)
             {
                 return;
             }
@@ -635,15 +635,6 @@ namespace DankBot
                         }
                         break;
                     case "DEBUG":
-                        if (!IsUserBotAdmin(message.Author.Id))
-                        {
-                            await message.Channel.SendMessageAsync($":no_entry: `Your KD is too low to execute this command...`");
-                            return;
-                        }
-                        else
-                        {
-                            await message.Channel.SendMessageAsync($":white_check_mark: `You are bot admin`");
-                        }
                         break;
                     default:
                         await message.Channel.SendMessageAsync($":no_entry: `The command '{cmd}' is as legit as an OpticGaming player on this server :(`");
