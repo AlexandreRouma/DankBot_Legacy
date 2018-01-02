@@ -16,6 +16,8 @@ namespace DankBot
         public static string DEFAULT_PLAYING = "";
         public static bool DEFAULT_SOUNDEFFECTS = true;
         public static string DEFAULT_YOUTUBEAPIKEY = "";
+        public static ulong DEFAULT_SERVERID = 0;
+        public static ulong[] DEFAULT_ADMINROLES = null;
 
         public static Config Configuration = new Config();
 
@@ -36,6 +38,8 @@ namespace DankBot
             Configuration.Playing = DEFAULT_PLAYING;
             Configuration.SoundEffects = DEFAULT_SOUNDEFFECTS;
             Configuration.YoutubeApiKey = DEFAULT_YOUTUBEAPIKEY;
+            Configuration.ServerID = DEFAULT_SERVERID;
+            Configuration.AdminRoles = DEFAULT_ADMINROLES;
         }
     }
 
@@ -46,5 +50,7 @@ namespace DankBot
         public string Playing;
         public bool SoundEffects;
         public string YoutubeApiKey;
+        public ulong ServerID;
+        public ulong[] AdminRoles;
     }
 }

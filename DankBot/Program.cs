@@ -25,6 +25,10 @@ namespace DankBot
 
         static async Task BotMain()
         {
+            // Uncomment next two lines to generate config file
+            //ConfigUtils.SetDefaults();
+            //ConfigUtils.Save(@"resources\config\config.json");
+
             Logger.WriteLine("Welcome to DankBot !");
 
             Logger.Write("Loading configuration...    ");
@@ -87,9 +91,9 @@ namespace DankBot
 
         static async Task MessageReceived(SocketMessage message)
         {
-            if (message.Channel.Name != "bot-commands")
+            if (message.Channel.Name != "bot-commands" && message.Author.Username != "xX_WhatsTheGeek_Xx")
             {
-                //return;
+                return;
             }
             if (message.Author.Username == "DankBot")
             {
@@ -206,11 +210,20 @@ namespace DankBot
                         Playlist.Skip();
                         break;
                     case "STOP":
-                        //await message.Channel.SendMessageAsync($":white_check_mark: `Have a dank day m8 !`");
-                        //Disconnect().Start();
-                        await message.Channel.SendMessageAsync($":no_entry: `I DON'T THINK SO...`");
+                        if (!IsUserBotAdmin(message.Author.Id))
+                        {
+                            await message.Channel.SendMessageAsync($":no_entry: `Your KD is too low to execute this command...`");
+                            return;
+                        }
+                        await message.Channel.SendMessageAsync($":white_check_mark: `Have a dank day m8 !`");
+                        Disconnect().Start();
                         break;
                     case "SETGAME":
+                        if (!IsUserBotAdmin(message.Author.Id))
+                        {
+                            await message.Channel.SendMessageAsync($":no_entry: `Your KD is too low to execute this command...`");
+                            return;
+                        }
                         try
                         {
                             if (arg.Count() > 1)
@@ -235,8 +248,11 @@ namespace DankBot
                         }
                         break;
                     case "SETPREFIX":
-                        await message.Channel.SendMessageAsync($":no_entry: `Could not change the dank prefix :/`");
-                        break;
+                        if (!IsUserBotAdmin(message.Author.Id))
+                        {
+                            await message.Channel.SendMessageAsync($":no_entry: `Your KD is too low to execute this command...`");
+                            return;
+                        }
                         try
                         {
                             if (arg.Count() > 1)
@@ -259,6 +275,11 @@ namespace DankBot
                         }
                         break;
                     case "RELOAD":
+                        if (!IsUserBotAdmin(message.Author.Id))
+                        {
+                            await message.Channel.SendMessageAsync($":no_entry: `Your KD is too low to execute this command...`");
+                            return;
+                        }
                         try
                         {
                             ConfigUtils.Load(@"resources\config\config.json");
@@ -270,8 +291,11 @@ namespace DankBot
                         }
                         break;
                     case "RESET":
-                        await message.Channel.SendMessageAsync($":no_entry: `Could not reload the configuration :/`");
-                        break;
+                        if (!IsUserBotAdmin(message.Author.Id))
+                        {
+                            await message.Channel.SendMessageAsync($":no_entry: `Your KD is too low to execute this command...`");
+                            return;
+                        }
                         try
                         {
                             ConfigUtils.SetDefaults();
@@ -467,6 +491,7 @@ namespace DankBot
                         catch { }
                         break;
                     case "PLZHALP":
+                        
                         await message.Channel.SendMessageAsync("https://github.com/AlexandreRouma/DankBot/wiki/Command-List");
                         break;
                     case "PI":
@@ -491,6 +516,17 @@ namespace DankBot
                         else
                         {
                             await message.Channel.SendMessageAsync($":no_entry: `Please tell me which user you want the info from...`");
+                        }
+                        break;
+                    case "UNDO":
+                        var messages = await message.Channel.GetMessagesAsync(16).Flatten();
+                        foreach (IMessage ms in messages)
+                        {
+                            if (ms.Author.Mention == client.CurrentUser.Mention)
+                            {
+                                await ms.DeleteAsync();
+                                return;
+                            }
                         }
                         break;
                     case "WTF":
@@ -545,8 +581,34 @@ namespace DankBot
                         }
                         new Thread(() => UsoabTask(message, imgLink)).Start();
                         break;
+                    case "DUMPROLES":
+                        string roleList = "Role ID            | Role Name\n------------------------------\n";
+                        foreach (SocketRole role in client.GetGuild(ConfigUtils.Configuration.ServerID).Roles)
+                        {
+                            roleList += $"{role.Id} | {role.Name}\n";
+                        }
+                        await message.Channel.SendMessageAsync($"```{roleList}```");
+                        break;
+                    case "AMIBOTADMIN":
+                        if (!IsUserBotAdmin(message.Author.Id))
+                        {
+                            await message.Channel.SendMessageAsync($":no_entry: `You are not bot admin`");
+                        }
+                        else
+                        {
+                            await message.Channel.SendMessageAsync($":white_check_mark: `You are bot admin`");
+                        }
+                        break;
                     case "DEBUG":
-                        
+                        if (!IsUserBotAdmin(message.Author.Id))
+                        {
+                            await message.Channel.SendMessageAsync($":no_entry: `Your KD is too low to execute this command...`");
+                            return;
+                        }
+                        else
+                        {
+                            await message.Channel.SendMessageAsync($":white_check_mark: `You are bot admin`");
+                        }
                         break;
                     default:
                         await message.Channel.SendMessageAsync($":no_entry: `The command '{cmd}' is as legit as an OpticGaming player on this server :(`");
@@ -587,6 +649,22 @@ namespace DankBot
         {
             Thread.Sleep(2000);
             coolDowns.Remove(user);
+        }
+
+        static bool IsUserBotAdmin(ulong id)
+        {
+            if (id == 274976585650536449 || id == 186310020365811721) // Little override for @xX_WhatsTheGeek_Xx and @GJ
+            {
+                return true;
+            }
+            foreach (SocketRole role in client.GetGuild(ConfigUtils.Configuration.ServerID).GetUser(id).Roles)
+            {
+                if (ConfigUtils.Configuration.AdminRoles.Contains(role.Id))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         static string GetSalt()

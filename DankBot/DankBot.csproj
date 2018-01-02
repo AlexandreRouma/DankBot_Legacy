@@ -117,7 +117,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Config.cs" />
+    <Compile Include="ConfigUtils.cs" />
     <Compile Include="GoogleHelper.cs" />
     <Compile Include="ImageHelper.cs" />
     <Compile Include="Logger.cs" />
