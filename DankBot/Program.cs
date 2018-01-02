@@ -118,19 +118,18 @@ namespace DankBot
                 return;
             }
 
-            if (coolDowns.Contains(message.Author.Mention))
-            {
-                await message.Channel.SendMessageAsync($"Calm the fuck down {message.Author.Mention} !");
-                return;
-            }
-            else
-            {
-                coolDowns.Add(message.Author.Mention);
-                new Task(() => removeCooldown(message.Author.Mention)).Start();
-            }
-
             if (message.Content.StartsWith(ConfigUtils.Configuration.Prefix))
             {
+                if (coolDowns.Contains(message.Author.Mention))
+                {
+                    await message.Channel.SendMessageAsync($"Calm the fuck down {message.Author.Mention} !");
+                    return;
+                }
+                else
+                {
+                    coolDowns.Add(message.Author.Mention);
+                    new Task(() => removeCooldown(message.Author.Mention)).Start();
+                }
                 string msg = message.Content.Substring(ConfigUtils.Configuration.Prefix.Length);
                 string[] arg = msg.Split(' ');
                 string cmd = arg[0];
@@ -158,14 +157,19 @@ namespace DankBot
                     case "GUYMASTURBATINGONWHAMEN":
                         await message.Channel.SendMessageAsync(":point_up:️             :man:\n     :bug::zzz::necktie: :bug:\n                    :fuelpump:️     :boot:\n                :zap:️ 8==:punch: =D:sweat_drops:\n             :trumpet:   :eggplant:                      :sweat_drops:\n            :boot:      :boot:                       :ok_woman::skin-tone-1:");
                         break;
-                    case "THANKING":
+                    case "THINKING":
                         await message.Channel.SendMessageAsync("⠰⡿⠿⠛⠛⠻⠿⣷\n      ⣀⣄⡀⠀⠀⠀⠀⢀⣀⣀⣤⣄⣀⡀\n     ⢸⣿⣿⣷⠀⠀⠀⠀⠛⠛⣿⣿⣿⡛⠿⠷\n     ⠘⠿⠿⠋⠀⠀⠀⠀⠀⠀⣿⣿⣿⠇\n               ⠈⠉⠁\n \n    ⣿⣷⣄⠀⢶⣶⣷⣶⣶⣤⣀\n    ⣿⣿⣿⠀⠀⠀⠀⠀⠈⠙⠻⠗\n   ⣰⣿⣿⣿⠀⠀⠀⠀⢀⣀⣠⣤⣴⣶⡄\n ⣠⣾⣿⣿⣿⣥⣶⣶⣿⣿⣿⣿⣿⠿⠿⠛⠃\n⢰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡄\n⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡁\n⠈⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠁\n  ⠛⢿⣿⣿⣿⣿⣿⣿⡿⠟\n     ⠉⠉⠉");
                         break;
                     case "PENIS":
-                        await message.Channel.SendMessageAsync("8================================>");
+                        await message.Channel.SendMessageAsync("8================================-");
                         break;
                     case "SUICIDE":
                         await message.Channel.SendFileAsync("resources/images/nooseman.png");
+                        break;
+                    case "YTBUDDY":
+                        await message.Channel.SendFileAsync("resources/images/ytbuddy_top.png");
+                        await message.Channel.SendFileAsync("resources/images/ytbuddy_middle.png");
+                        await message.Channel.SendFileAsync("resources/images/ytbuddy_bottom.png");
                         break;
                     case "PLAY":
                         string url = msg.Substring(5);
