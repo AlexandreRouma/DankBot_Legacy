@@ -13,11 +13,11 @@ namespace DankBot
     {
         public static string DEFAULT_BOTTOKEN = "[PLEASE ENTER YOUR TOKEN HERE]";
         public static string DEFAULT_PREFIX = "!";
-        public static string DEFAULT_PLAYING = "";
+        public static string DEFAULT_PLAYING = "DankBot";
         public static bool DEFAULT_SOUNDEFFECTS = true;
-        public static string DEFAULT_YOUTUBEAPIKEY = "";
+        public static string DEFAULT_YOUTUBEAPIKEY = "[PLEASE YOUTUBE API KEY YOUR TOKEN HERE]";
         public static ulong DEFAULT_SERVERID = 0;
-        public static ulong[] DEFAULT_ADMINROLES = null;
+        public static ulong[] DEFAULT_ADMINROLES = { 0 };
 
         public static Config Configuration = new Config();
 

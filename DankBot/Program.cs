@@ -25,12 +25,25 @@ namespace DankBot
 
         static async Task BotMain()
         {
-            // Uncomment next two lines to generate config file
-            //ConfigUtils.SetDefaults();
-            //ConfigUtils.Save(@"resources\config\config.json");
 
             Logger.WriteLine("Welcome to DankBot !");
 
+            if (!File.Exists(@"resources\config\config.json"))
+            {
+                Logger.Write("Generating configuration... ");
+                try
+                {
+                    ConfigUtils.SetDefaults();
+                    ConfigUtils.Save(@"resources\config\config.json");
+                    Logger.OK();
+                }
+                catch
+                {
+                    Logger.FAILED();
+                    Panic("Could not generate configuration file !");
+                }
+                
+            }
             Logger.Write("Loading configuration...    ");
             try
             {
@@ -201,6 +214,21 @@ namespace DankBot
                         }
                         break;
                     case "SKIP":
+                        IAudioChannel schannel = null;
+                        schannel = schannel ?? (message.Author as IGuildUser)?.VoiceChannel;
+                        if (schannel == null)
+                        {
+                            await message.Channel.SendMessageAsync($":no_entry: `Sorry, u aren't in a fucking audio channel m8`");
+                            return;
+                        }
+                        if (!Playlist.SkipVotes.Contains(message.Author.Id))
+                        {
+                            Playlist.SkipVotes.Add(message.Author.Id);
+                        }
+                        else
+                        {
+                            await message.Channel.SendMessageAsync($":no_entry: `You already voted...`");
+                        }
                         Playlist.Skip();
                         break;
                     case "STOP":
