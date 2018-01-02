@@ -91,7 +91,7 @@ namespace DankBot
 
         static async Task MessageReceived(SocketMessage message)
         {
-            if (message.Channel.Name != "bot-commands" && (message.Author.Id == 274976585650536449 || message.Author.Id == 186310020365811721)) // Little override for @xX_WhatsTheGeek_Xx and @GJ
+            if (message.Channel.Name != "bot-commands" && message.Author.Id != 274976585650536449 && message.Author.Id != 186310020365811721) // Little override for @xX_WhatsTheGeek_Xx and @GJ
             {
                 return;
             }
