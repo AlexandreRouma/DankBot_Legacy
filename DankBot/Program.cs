@@ -59,7 +59,7 @@ namespace DankBot
             Logger.Write("Starting discord client...  ");
             try
             {
-                await client.LoginAsync(TokenType.User, ConfigUtils.Configuration.BotToken);
+                await client.LoginAsync(ConfigUtils.Configuration.TokenType, ConfigUtils.Configuration.BotToken);
                 await client.StartAsync();
                 await client.SetStatusAsync(UserStatus.Online);
                 Logger.OK();
@@ -224,6 +224,14 @@ namespace DankBot
                         if (!Playlist.SkipVotes.Contains(message.Author.Id))
                         {
                             Playlist.SkipVotes.Add(message.Author.Id);
+                            if (Playlist.SkipVotes.Count() > await schannel.GetUsersAsync().Count())
+                            {
+                                Playlist.Skip();
+                            }
+                            else
+                            {
+                                await message.Channel.SendMessageAsync($":white_check_mark: `'Your vote has been added. {await schannel.GetUsersAsync().Count() - Playlist.SkipVotes.Count()} more votes needed`");
+                            }
                         }
                         else
                         {
@@ -383,9 +391,14 @@ namespace DankBot
                             int id = int.Parse(msg.Substring(6));
                             string name = Playlist.files[id - 1].Title;
                             if (id == 1)
-                                Playlist.Skip();
+                            {
+                                await message.Channel.SendMessageAsync($":no_entry: `You can't remove the song currently playing...` :thinking:");
+                                return;
+                            }
                             else
+                            {
                                 Playlist.files.RemoveAt(id - 1);
+                            } 
                             await message.Channel.SendMessageAsync($":white_check_mark: `Removed {name} from the playlist`");
                         }
                         catch
