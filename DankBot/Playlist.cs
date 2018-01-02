@@ -17,10 +17,20 @@ namespace DankBot
         public static IAudioChannel CurrentChannel;
         private static Thread playerThread = new Thread(player);
         public static List<PlayListItem> files = new List<PlayListItem>();
+        public static List<ulong> SkipVotes = new List<ulong>();
         private static bool playing = false;
         public static bool Enabled = false;
         public static bool Skipped = false;
         public static bool Loop = false;
+
+        public static void Add(YouTubeVideo video)
+        {
+            string videoid = video.Url.Substring(video.Url.LastIndexOf("v=") + 2, 11);
+            PlayListItem item = new PlayListItem();
+            item.Title = video.Title;
+            item.Url = video.Url;
+            Playlist.files.Add(item);
+        }
 
         public static async Task JoinChannel(IAudioChannel channel)
         {
@@ -62,8 +72,6 @@ namespace DankBot
             Enabled = false;
         }
 
-        static Thread senderThread;
-
         private static void player()
         {
             while (true)
@@ -78,6 +86,7 @@ namespace DankBot
                     {
                         Program.client.SetGameAsync(files[0].Title).Wait();
                     }
+                    SkipVotes.Clear();
                     SendAsync(files[0]);
                     playing = true;
                     if (!ffmpeg.HasExited)

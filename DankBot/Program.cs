@@ -187,7 +187,7 @@ namespace DankBot
                                         return;
                                     }
                                 }
-                                YoutubeAudio.Download(video);
+                                Playlist.Add(video);
                                 await message.Channel.SendMessageAsync($":white_check_mark: `'{video.Title}' has been added to the playlist !`");
                             }
                             else
