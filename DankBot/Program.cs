@@ -15,6 +15,14 @@ namespace DankBot
 {
     class Program
     {
+        public static string[] because = { "Because of china.",
+                                           "Because you're gay.",
+                                           "Because you have cancer.",
+                                           "Because of jake paul.",
+                                           "Because of hitler.",
+                                           "Because jetfuel can't melt steel beams",
+                                           "Because mans not hot",
+                                           "because GJ got banned"};
 
         public static DiscordSocketClient client = new DiscordSocketClient();
 
@@ -104,10 +112,7 @@ namespace DankBot
 
         static async Task MessageReceived(SocketMessage message)
         {
-            if (message.Channel.Name != "bot-commands" && message.Author.Id != 274976585650536449 && message.Author.Id != 186310020365811721) // Little override for @xX_WhatsTheGeek_Xx and @GJ
-            {
-                return;
-            }
+
             if (message.Author.Id == client.CurrentUser.Id)
             {
                 return;
@@ -134,6 +139,19 @@ namespace DankBot
                 string[] arg = msg.Split(' ');
                 string cmd = arg[0];
 
+                if (cmd.ToUpper() == "G")
+                {
+                    cmd = "GOOGLE";
+                }
+                else if (cmd.ToUpper() == "YT")
+                {
+                    cmd = "YOUTUBE";
+                }
+                else if (cmd.ToUpper() == "SE")
+                {
+                    cmd = "SOUNDEFFECT";
+                }
+                var type = message.Channel.EnterTypingState();
                 switch (cmd.ToUpper())
                 {
                     case "":
@@ -149,7 +167,30 @@ namespace DankBot
                         await message.Channel.SendMessageAsync("I'm not ur dank calculator asshole !");
                         break;
                     case "GOOGLE":
-                        await message.Channel.SendMessageAsync($"https://www.google.fr/search?q={msg.Substring(7).Replace(' ', '+')}");
+                        if (arg.Count() > 1)
+                        {
+                            Google.Apis.Customsearch.v1.Data.Result r = GoogleHelper.Search(msg.Substring(2));
+                            await message.Channel.SendMessageAsync("", false, GenGoogleEmbed(r.Title, r.Link, r.Snippet));
+                        }
+                        else
+                        {
+                            await message.Channel.SendMessageAsync($":white_check_mark: `Please enter a search term`");
+                        }
+                        break;
+                    case "WIDE":
+                        if (arg.Count() > 1)
+                        {
+                            string str = "";
+                            foreach (char c in msg.Substring(5))
+                            {
+                                str += $"{c} ";
+                            }
+                            await message.Channel.SendMessageAsync(str);
+                        }
+                        else
+                        {
+                            await message.Channel.SendMessageAsync($":white_check_mark: `Please enter some text...`");
+                        }
                         break;
                     case "D0G3":
                         await message.Channel.SendMessageAsync("░░░░░░░█▐▓▓░████▄▄▄█▀▄▓▓▓▌█\n░░░░░▄█▌▀▄▓▓▄▄▄▄▀▀▀▄▓▓▓▓▓▌█\n░░░▄█▀▀▄▓█▓▓▓▓▓▓▓▓▓▓▓▓▀░▓▌█\n░░█▀▄▓▓▓███▓▓▓███▓▓▓▄░░▄▓▐█▌\n░█▌▓▓▓▀▀▓▓▓▓███▓▓▓▓▓▓▓▄▀▓▓▐█\n▐█▐██▐░▄▓▓▓▓▓▀▄░▀▓▓▓▓▓▓▓▓▓▌█▌\n█▌███▓▓▓▓▓▓▓▓▐░░▄▓▓███▓▓▓▄▀▐█\n█▐█▓▀░░▀▓▓▓▓▓▓▓▓▓██████▓▓▓▓▐█\n▌▓▄▌▀░▀░▐▀█▄▓▓██████████▓▓▓▌█▌\n▌▓▓▓▄▄▀▀▓▓▓▀▓▓▓▓▓▓▓▓█▓█▓█▓▓▌█▌\n█▐▓▓▓▓▓▓▄▄▄▓▓▓▓▓▓█▓█▓█▓█▓▓▓▐█");
@@ -204,7 +245,16 @@ namespace DankBot
                                         return;
                                     }
                                 }
-                                Playlist.Add(video);
+                                string tUpper = video.Title.ToUpper();
+                                if (tUpper.Contains("FROZEN") && tUpper.Contains("FUCK") && tUpper.Contains("ASS"))
+                                {
+                                    await message.Channel.SendMessageAsync($":no_entry: `That's fucking annoying GJ...`");
+                                    return;
+                                }
+                                else
+                                {
+                                    Playlist.Add(video);
+                                }
                                 await message.Channel.SendMessageAsync($":white_check_mark: `'{video.Title}' has been added to the playlist !`");
                             }
                             else
@@ -341,7 +391,7 @@ namespace DankBot
                             await message.Channel.SendMessageAsync($":no_entry: `Could not reload the configuration :/`");
                         }
                         break;
-                    case "YT":
+                    case "YOUTUBE":
                         try
                         {
                             await message.Channel.SendMessageAsync(YouTubeHelper.Search(msg.Substring(3)).Url);
@@ -402,7 +452,7 @@ namespace DankBot
                             else
                             {
                                 Playlist.files.RemoveAt(id - 1);
-                            } 
+                            }
                             await message.Channel.SendMessageAsync($":white_check_mark: `Removed {name} from the playlist`");
                         }
                         catch
@@ -422,7 +472,7 @@ namespace DankBot
                             await message.Channel.SendMessageAsync($":no_entry: `Invalid number` :joy:");
                         }
                         break;
-                    case "SE":
+                    case "SOUNDEFFECT":
                         try
                         {
                             if (Playlist.files.Count == 0)
@@ -530,7 +580,6 @@ namespace DankBot
                         catch { }
                         break;
                     case "PLZHALP":
-                        
                         await message.Channel.SendMessageAsync("https://github.com/AlexandreRouma/DankBot/wiki/Command-List");
                         break;
                     case "PI":
@@ -570,6 +619,9 @@ namespace DankBot
                         break;
                     case "WTF":
                         await message.Channel.SendFileAsync(@"resources\images\wtf.png");
+                        break;
+                    case "WINK":
+                        await message.Channel.SendFileAsync(@"resources\images\wink.png");
                         break;
                     case "HSGTF":
                         string imgLink = "";
@@ -638,13 +690,52 @@ namespace DankBot
                             await message.Channel.SendMessageAsync($":white_check_mark: `You are bot admin`");
                         }
                         break;
+                    case "XD":
+                        await message.Channel.SendMessageAsync($"​:joy::joy::joy::joy::joy::joy::joy::joy::joy::joy::joy::joy::joy::joy::joy:\n:joy::cool::cool::cool::cool::cool::cool::cool::cool::cool::cool::cool::cool::cool::joy:\n:joy::cool::100::cool::cool::cool::100::cool::100::100::100::cool::cool::cool::joy:\n:joy::cool::100::100::cool::100::100::cool::100::cool::100::100::cool::cool::joy:\n:joy::cool::cool::100::cool::100::cool::cool::100::cool::cool::100::100::cool::joy:\n:joy::cool::cool::100::100::100::cool::cool::100::cool::cool::cool::100::cool::joy:\n:joy::cool::cool::cool::100::cool::cool::cool::100::cool::cool::cool::100::cool::joy:\n:joy::cool::cool::100::100::100::cool::cool::100::cool::cool::cool::100::cool::joy:\n:joy::cool::cool::100::cool::100::cool::cool::100::cool::cool::100::100::cool::joy:\n:joy::cool::100::100::cool::100::100::cool::100::cool::100::100::cool::cool::joy:\n:joy::cool::100::cool::cool::cool::100::cool::100::100::100::cool::cool::cool::joy:\n:joy::cool::cool::cool::cool::cool::cool::cool::cool::cool::cool::cool::cool::cool::joy:\n:joy::joy::joy::joy::joy::joy::joy::joy::joy::joy::joy::joy::joy::joy::joy:\n");
+                        break;
+                    case "WHY":
+                        await message.Channel.SendMessageAsync($"`{because[new Random().Next(0, because.Count())]}`");
+                        break;
                     case "DEBUG":
+                        await message.Channel.SendMessageAsync("", false, generateTest());
                         break;
                     default:
                         await message.Channel.SendMessageAsync($":no_entry: `The command '{cmd}' is as legit as an OpticGaming player on this server :(`");
                         break;
                 }
+                type.Dispose();
             }
+        }
+
+        static Embed GenGoogleEmbed(string title, string url, string desc)
+        {
+            EmbedBuilder em = new Discord.EmbedBuilder();
+            em.Color = Discord.Color.Blue;
+            em.Title = title;
+            em.Description = desc;
+            em.Url = url;
+            return em.Build();
+        }
+
+        static Embed generateTest()
+        {
+            EmbedBuilder em = new Discord.EmbedBuilder();
+            em.Color = Discord.Color.Blue;
+            em.Title = "Title";
+            EmbedAuthorBuilder eab = new EmbedAuthorBuilder();
+            eab.Url = "http://www.google.com/";
+            eab.Name = "Embed Author Name";
+            eab.IconUrl = "https://i.imgur.com/2HXCkSR.png";
+            em.Author = eab;
+            em.Description = "|   Name    |       Usage        |                             Desciption                              |\n|-----------|--------------------|---------------------------------------------------------------------|\n| say       | say [message]      | The bot will send back the message sent to him                      |\n| calc      | calc [formula]     | Use the bot as a calculator [NOT IMPLEMENTED YET]                   |\n| help      | help               | Sends this to the user typing this command                          |\n| rng       | rng [max]          | Displays a random number between 0 and MAX                          |\n| pi        | pi                 | Displays 2000 decimals of PI                                        |";
+            EmbedFooterBuilder emfb = new EmbedFooterBuilder();
+            emfb.IconUrl = "https://i.imgur.com/Pieqv0h.png";
+            emfb.Text = "Footer text";
+            em.Footer = emfb;
+            em.ImageUrl = "https://i.imgur.com/Wks5VLA.png";
+            em.ThumbnailUrl = "https://i.imgur.com/asc2NGx.png";
+            em.Timestamp = new DateTimeOffset(new DateTime(2042,4,20,4,20,42));
+            return em.Build();
         }
 
         static void HsgtfTask(SocketMessage message, string imgLink)
@@ -690,6 +781,18 @@ namespace DankBot
             foreach (SocketRole role in client.GetGuild(ConfigUtils.Configuration.ServerID).GetUser(id).Roles)
             {
                 if (ConfigUtils.Configuration.AdminRoles.Contains(role.Id))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        static bool DoesUserHaveRole(ulong userId, ulong roleId)
+        {
+            foreach (SocketRole role in client.GetGuild(ConfigUtils.Configuration.ServerID).GetUser(userId).Roles)
+            {
+                if (role.Id == roleId)
                 {
                     return true;
                 }

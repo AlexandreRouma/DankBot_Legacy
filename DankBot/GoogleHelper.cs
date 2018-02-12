@@ -6,33 +6,47 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
+using Google.Apis.Auth.OAuth2;
+using Google.Apis.Services;
+using Google.Apis.Upload;
+using Google.Apis.Util.Store;
+using Google.Apis.Customsearch.v1;
+using Google.Apis.Customsearch.v1.Data;
+using Google.Apis.Json;
+
 namespace DankBot
 {
     class GoogleHelper
     {
-        public static GoogleResult Search(string search)
+        public static Result Search(string search)
         {
-            //string page = new WebClient().DownloadString($"https://www.google.co.uk/search?q={search}");
-            //string descriptorRaw = page.Substring(page.IndexOf("<div class=\"g\">") + 17);
-            //int urlStart = descriptorRaw.IndexOf(";url=") + 10;
-            //string urlRaw = descriptorRaw.Substring(urlStart);
-            //string url = urlRaw.Substring(0, urlRaw.IndexOf("&amp;"));
-            string uriString = "http://www.google.com/search";
-            string keywordString = "Test Keyword";
+            var googleService = new CustomsearchService(new BaseClientService.Initializer()
+            {
+                ApiKey = "AIzaSyAz8XwVBS15-YpKBZd_r38HGX2BYzGBNT4",
+                ApplicationName = "DankBot"
+            });
 
-            WebClient webClient = new WebClient();
+            var listRequest = googleService.Cse.List(search);
+            listRequest.Cx = "009590618107170545812:chu7p8sc1ie";
+            var src = listRequest.Execute();
 
-            NameValueCollection nameValueCollection = new NameValueCollection();
-            nameValueCollection.Add("q", keywordString);
-
-            webClient.QueryString.Add(nameValueCollection);
-            string str = webClient.DownloadString(uriString);
-            return new GoogleResult();
+            return src.Items.FirstOrDefault();
         }
-    }
 
-    class GoogleResult
-    {
-        public string Url;
+        public static Result SearchImage(string search)
+        {
+            var googleService = new CustomsearchService(new BaseClientService.Initializer()
+            {
+                ApiKey = "AIzaSyAz8XwVBS15-YpKBZd_r38HGX2BYzGBNT4",
+                ApplicationName = "DankBot"
+            });
+
+            var listRequest = googleService.Cse.List(search);
+            listRequest.FileType = "png";
+            listRequest.Cx = "009590618107170545812:vkajuihze6m";
+            var src = listRequest.Execute();
+
+            return src.Items.FirstOrDefault();
+        }
     }
 }
