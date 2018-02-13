@@ -828,7 +828,7 @@ namespace DankBot
                                 }
                             }
                             fancyString = fancyString.Substring(0, fancyString.Length - 1);
-                            await message.Channel.SendMessageAsync($"{fancyString}");
+                            await message.Channel.SendMessageAsync(fancyString);
 
                         }
                         else
