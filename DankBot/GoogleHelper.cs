@@ -22,7 +22,7 @@ namespace DankBot
         {
             var googleService = new CustomsearchService(new BaseClientService.Initializer()
             {
-                ApiKey = "AIzaSyAz8XwVBS15-YpKBZd_r38HGX2BYzGBNT4",
+                ApiKey = ConfigUtils.Configuration.GoogleApiKey,
                 ApplicationName = "DankBot"
             });
 
@@ -37,7 +37,7 @@ namespace DankBot
         {
             var googleService = new CustomsearchService(new BaseClientService.Initializer()
             {
-                ApiKey = "AIzaSyAz8XwVBS15-YpKBZd_r38HGX2BYzGBNT4",
+                ApiKey = ConfigUtils.Configuration.GoogleApiKey,
                 ApplicationName = "DankBot"
             });
 

@@ -10,6 +10,7 @@ using System.Configuration;
 using System.IO;
 using System.Net;
 using System.Drawing;
+using System.Text.RegularExpressions;
 
 namespace DankBot
 {
@@ -70,6 +71,7 @@ namespace DankBot
                 await client.LoginAsync(ConfigUtils.Configuration.TokenType, ConfigUtils.Configuration.BotToken);
                 await client.StartAsync();
                 await client.SetStatusAsync(UserStatus.Online);
+                await client.SetGameAsync(ConfigUtils.Configuration.Playing);
                 Logger.OK();
             }
             catch (Exception ex)
@@ -139,19 +141,36 @@ namespace DankBot
                 string[] arg = msg.Split(' ');
                 string cmd = arg[0];
 
+                // Alt handling
                 if (cmd.ToUpper() == "G")
                 {
                     cmd = "GOOGLE";
+                    msg = Regex.Replace(msg, "G", "GOOGLE", RegexOptions.IgnoreCase);
                 }
                 else if (cmd.ToUpper() == "YT")
                 {
                     cmd = "YOUTUBE";
+                    msg = Regex.Replace(msg, "YT", "YOUTUBE", RegexOptions.IgnoreCase);
                 }
                 else if (cmd.ToUpper() == "SE")
                 {
                     cmd = "SOUNDEFFECT";
+                    msg = Regex.Replace(msg, "SE", "SOUNDEFFECT", RegexOptions.IgnoreCase);
                 }
+                else if (cmd.ToUpper() == "B64E")
+                {
+                    cmd = "B64ENCODE";
+                    msg = Regex.Replace(msg, "B64E", "B64ENCODE", RegexOptions.IgnoreCase);
+                }
+                else if (cmd.ToUpper() == "B64D")
+                {
+                    cmd = "B64DECODE";
+                    msg = Regex.Replace(msg, "B64D", "B64DECODE", RegexOptions.IgnoreCase);
+                }
+                // --------
+
                 var type = message.Channel.EnterTypingState();
+
                 switch (cmd.ToUpper())
                 {
                     case "":
@@ -242,6 +261,7 @@ namespace DankBot
                                     if (item.Url == video.Url)
                                     {
                                         await message.Channel.SendMessageAsync($":no_entry: `Sorry, this video is already in the playlist !`");
+                                        type.Dispose();
                                         return;
                                     }
                                 }
@@ -249,6 +269,7 @@ namespace DankBot
                                 if (tUpper.Contains("FROZEN") && tUpper.Contains("FUCK") && tUpper.Contains("ASS"))
                                 {
                                     await message.Channel.SendMessageAsync($":no_entry: `That's fucking annoying GJ...`");
+                                    type.Dispose();
                                     return;
                                 }
                                 else
@@ -273,6 +294,7 @@ namespace DankBot
                         if (schannel == null)
                         {
                             await message.Channel.SendMessageAsync($":no_entry: `Sorry, u aren't in a fucking audio channel m8`");
+                            type.Dispose();
                             return;
                         }
                         if (!Playlist.SkipVotes.Contains(message.Author.Id))
@@ -297,6 +319,7 @@ namespace DankBot
                         if (!IsUserBotAdmin(message.Author.Id))
                         {
                             await message.Channel.SendMessageAsync($":no_entry: `Your KD is too low to execute this command...`");
+                            type.Dispose();
                             return;
                         }
                         await message.Channel.SendMessageAsync($":white_check_mark: `Have a dank day m8 !`");
@@ -306,6 +329,7 @@ namespace DankBot
                         if (!IsUserBotAdmin(message.Author.Id))
                         {
                             await message.Channel.SendMessageAsync($":no_entry: `Your KD is too low to execute this command...`");
+                            type.Dispose();
                             return;
                         }
                         try
@@ -335,6 +359,7 @@ namespace DankBot
                         if (!IsUserBotAdmin(message.Author.Id))
                         {
                             await message.Channel.SendMessageAsync($":no_entry: `Your KD is too low to execute this command...`");
+                            type.Dispose();
                             return;
                         }
                         try
@@ -362,6 +387,7 @@ namespace DankBot
                         if (!IsUserBotAdmin(message.Author.Id))
                         {
                             await message.Channel.SendMessageAsync($":no_entry: `Your KD is too low to execute this command...`");
+                            type.Dispose();
                             return;
                         }
                         try
@@ -378,6 +404,7 @@ namespace DankBot
                         if (!IsUserBotAdmin(message.Author.Id))
                         {
                             await message.Channel.SendMessageAsync($":no_entry: `Your KD is too low to execute this command...`");
+                            type.Dispose();
                             return;
                         }
                         try
@@ -447,6 +474,7 @@ namespace DankBot
                             if (id == 1)
                             {
                                 await message.Channel.SendMessageAsync($":no_entry: `You can't remove the song currently playing...` :thinking:");
+                                type.Dispose();
                                 return;
                             }
                             else
@@ -613,6 +641,7 @@ namespace DankBot
                             if (ms.Author.Mention == client.CurrentUser.Mention)
                             {
                                 await ms.DeleteAsync();
+                                type.Dispose();
                                 return;
                             }
                         }
@@ -636,6 +665,7 @@ namespace DankBot
                         if (imgLink == "")
                         {
                             await message.Channel.SendMessageAsync($":no_entry: `Sorry, I can't find any image :/`");
+                            type.Dispose();
                             return;
                         }
                         new Thread(() => HsgtfTask(message, imgLink)).Start();
@@ -652,6 +682,7 @@ namespace DankBot
                         if (imgLink == "")
                         {
                             await message.Channel.SendMessageAsync($":no_entry: `Sorry, I can't find any image :/`");
+                            type.Dispose();
                             return;
                         }
                         new Thread(() => WthTask(message, imgLink)).Start();
@@ -668,6 +699,7 @@ namespace DankBot
                         if (imgLink == "")
                         {
                             await message.Channel.SendMessageAsync($":no_entry: `Sorry, I can't find any image :/`");
+                            type.Dispose();
                             return;
                         }
                         new Thread(() => UsoabTask(message, imgLink)).Start();
@@ -695,6 +727,26 @@ namespace DankBot
                         break;
                     case "WHY":
                         await message.Channel.SendMessageAsync($"`{because[new Random().Next(0, because.Count())]}`");
+                        break;
+                    case "B64ENCODE":
+                        if (arg.Count() > 1)
+                        {
+                            await message.Channel.SendMessageAsync($"`{Convert.ToBase64String(Encoding.Default.GetBytes(msg.Substring(10)))}`");
+                        }
+                        else
+                        {
+                            await message.Channel.SendMessageAsync($":no_entry: `Please say what you want me to encode...`");
+                        }
+                        break;
+                    case "B64DECODE":
+                        if (arg.Count() > 1)
+                        {
+                            await message.Channel.SendMessageAsync($"`{Encoding.Default.GetString(Convert.FromBase64String(msg.Substring(10)))}`");
+                        }
+                        else
+                        {
+                            await message.Channel.SendMessageAsync($":no_entry: `Please say what you want me to encode...`");
+                        }
                         break;
                     case "DEBUG":
                         await message.Channel.SendMessageAsync("", false, generateTest());
@@ -727,7 +779,7 @@ namespace DankBot
             eab.Name = "Embed Author Name";
             eab.IconUrl = "https://i.imgur.com/2HXCkSR.png";
             em.Author = eab;
-            em.Description = "|   Name    |       Usage        |                             Desciption                              |\n|-----------|--------------------|---------------------------------------------------------------------|\n| say       | say [message]      | The bot will send back the message sent to him                      |\n| calc      | calc [formula]     | Use the bot as a calculator [NOT IMPLEMENTED YET]                   |\n| help      | help               | Sends this to the user typing this command                          |\n| rng       | rng [max]          | Displays a random number between 0 and MAX                          |\n| pi        | pi                 | Displays 2000 decimals of PI                                        |";
+            em.Description = "Description";
             EmbedFooterBuilder emfb = new EmbedFooterBuilder();
             emfb.IconUrl = "https://i.imgur.com/Pieqv0h.png";
             emfb.Text = "Footer text";
@@ -768,16 +820,12 @@ namespace DankBot
 
         static void removeCooldown(string user)
         {
-            Thread.Sleep(2000);
+            Thread.Sleep(1000);
             coolDowns.Remove(user);
         }
 
         static bool IsUserBotAdmin(ulong id)
         {
-            if (id == 274976585650536449 || id == 186310020365811721) // Little override for @xX_WhatsTheGeek_Xx and @GJ
-            {
-                return true;
-            }
             foreach (SocketRole role in client.GetGuild(ConfigUtils.Configuration.ServerID).GetUser(id).Roles)
             {
                 if (ConfigUtils.Configuration.AdminRoles.Contains(role.Id))
