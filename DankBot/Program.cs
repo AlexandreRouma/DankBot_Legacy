@@ -11,6 +11,7 @@ using System.IO;
 using System.Net;
 using System.Drawing;
 using System.Text.RegularExpressions;
+using UrbanDictionnet;
 
 namespace DankBot
 {
@@ -748,8 +749,27 @@ namespace DankBot
                             await message.Channel.SendMessageAsync($":no_entry: `Please say what you want me to encode...`");
                         }
                         break;
+                    case "URBAN":
+                        if (arg.Count() > 1)
+                        {
+                            UrbanClient uc = new UrbanClient();
+                            WordDefine word = await uc.GetWordAsync(msg.Substring(6));
+                            if (word.Count() > 0)
+                            {
+                                await message.Channel.SendMessageAsync("", false, genUrban(word.FirstOrDefault()));
+                            }
+                            else
+                            {
+                                await message.Channel.SendMessageAsync($":no_entry: `No results` :thinking:");
+                            }
+                        }
+                        else
+                        {
+                            await message.Channel.SendMessageAsync($":no_entry: `Tell me which word to search...`");
+                        }
+                        break;
                     case "DEBUG":
-                        await message.Channel.SendMessageAsync("", false, generateTest());
+                        
                         break;
                     default:
                         await message.Channel.SendMessageAsync($":no_entry: `The command '{cmd}' is as legit as an OpticGaming player on this server :(`");
@@ -813,6 +833,30 @@ namespace DankBot
             {
                 em.AddField("Is a bot: ", "No");
             }
+            return em.Build();
+        }
+
+        static Embed genUrban(DefinitionData definition)
+        {
+            EmbedBuilder em = new Discord.EmbedBuilder();
+            em.Color = Discord.Color.Blue;
+            em.Title = definition.Word;
+            string def = definition.Definition;
+            if (def.Length > 1024)
+            {
+                def = $"{def.Substring(0, 1021)}...";
+            }
+            em.AddField("Definition:", def);
+            string exp = definition.Example;
+            if (exp.Length > 1024)
+            {
+                exp = $"{exp.Substring(0, 1021)}...";
+            }
+            em.AddField("Example:", exp);
+            EmbedFooterBuilder emfb = new EmbedFooterBuilder();
+            emfb.Text = $"By {definition.Author}";
+            em.Footer = emfb;
+            em.Url = definition.Permalink;
             return em.Build();
         }
 
