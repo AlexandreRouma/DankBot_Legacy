@@ -1,5 +1,7 @@
 # DankBot
 OpenSource C# customisable discord bot
 
-Special thanks:
+Special thanks to:
 
+* Dewyer
+* Hollexian
