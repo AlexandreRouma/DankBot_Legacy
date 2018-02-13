@@ -753,12 +753,12 @@ namespace DankBot
                         if (arg.Count() > 1)
                         {
                             UrbanClient uc = new UrbanClient();
-                            WordDefine word = await uc.GetWordAsync(msg.Substring(6));
-                            if (word.Count() > 0)
+                            try
                             {
+                                WordDefine word = await uc.GetWordAsync(msg.Substring(6));
                                 await message.Channel.SendMessageAsync("", false, genUrban(word.FirstOrDefault()));
                             }
-                            else
+                            catch
                             {
                                 await message.Channel.SendMessageAsync($":no_entry: `No results` :thinking:");
                             }
