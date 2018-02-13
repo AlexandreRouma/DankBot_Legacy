@@ -848,7 +848,7 @@ namespace DankBot
 
         static Embed GenGoogleEmbed(string title, string url, string desc)
         {
-            EmbedBuilder em = new Discord.EmbedBuilder();
+            EmbedBuilder em = new EmbedBuilder();
             em.Color = Discord.Color.Blue;
             em.Title = title;
             em.Description = desc;
@@ -858,7 +858,7 @@ namespace DankBot
 
         static Embed GenUser(SocketUser user)
         {
-            EmbedBuilder em = new Discord.EmbedBuilder();
+            EmbedBuilder em = new EmbedBuilder();
             em.Color = Discord.Color.Blue;
             em.ThumbnailUrl = user.GetAvatarUrl();
             EmbedAuthorBuilder eab = new EmbedAuthorBuilder();
@@ -905,7 +905,7 @@ namespace DankBot
 
         static Embed genUrban(DefinitionData definition)
         {
-            EmbedBuilder em = new Discord.EmbedBuilder();
+            EmbedBuilder em = new EmbedBuilder();
             em.Color = Discord.Color.Blue;
             em.Title = definition.Word;
             string def = definition.Definition;
