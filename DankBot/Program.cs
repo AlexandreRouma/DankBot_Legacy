@@ -384,7 +384,7 @@ namespace DankBot
                                 await message.Channel.SendMessageAsync($":white_check_mark: `The prefix has been reset.`");
                             }
                         }
-                        catch (Exception ex)
+                        catch
                         {
                             await message.Channel.SendMessageAsync($":no_entry: `Could not change the dank prefix :/`");
                         }
@@ -401,7 +401,7 @@ namespace DankBot
                             ConfigUtils.Load(@"resources\config\config.json");
                             await message.Channel.SendMessageAsync($":white_check_mark: `The configuration has been reloaded`");
                         }
-                        catch (Exception ex)
+                        catch
                         {
                             await message.Channel.SendMessageAsync($":no_entry: `Could not reload the configuration :/`");
                         }
@@ -419,7 +419,7 @@ namespace DankBot
                             ConfigUtils.Save(@"resources\config\config.json");
                             await message.Channel.SendMessageAsync($":white_check_mark: `The configuration has been reset`");
                         }
-                        catch (Exception ex)
+                        catch
                         {
                             await message.Channel.SendMessageAsync($":no_entry: `Could not reload the configuration :/`");
                         }
@@ -815,7 +815,6 @@ namespace DankBot
                             var originalAbc = "abcdefghijklmnopqrstuvwxyz1234567890";
                             var abc = "ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ１２３４５６７８９０";
                             var fancyString = "";
-
                             foreach (var character in arg[1])
                             {
                                 var index = originalAbc.IndexOf(character);
