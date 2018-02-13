@@ -33,8 +33,8 @@ namespace DankBot
             {
                 if (r.Id.Kind == "youtube#video")
                 {
-                    video.Title = searchListResponse.Items.First().Snippet.Title;
-                    video.Url = $"https://www.youtube.com/watch?v={searchListResponse.Items.First().Id.VideoId}";
+                    video.Title = r.Snippet.Title;
+                    video.Url = $"https://www.youtube.com/watch?v={r.Id.VideoId}";
                     return video;
                 }
             }
