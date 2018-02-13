@@ -627,7 +627,7 @@ namespace DankBot
                     case "USERINFO":
                         if (message.MentionedUsers.Count() > 0)
                         {
-                            message.MentionedUsers.FirstOrDefault();
+                            await message.Channel.SendMessageAsync("", false, GenUser(message.MentionedUsers.FirstOrDefault()));
                         }
                         else
                         {
@@ -766,6 +766,53 @@ namespace DankBot
             em.Title = title;
             em.Description = desc;
             em.Url = url;
+            return em.Build();
+        }
+
+        static Embed GenUser(SocketUser user)
+        {
+            EmbedBuilder em = new Discord.EmbedBuilder();
+            em.Color = Discord.Color.Blue;
+            em.ThumbnailUrl = user.GetAvatarUrl();
+            EmbedAuthorBuilder eab = new EmbedAuthorBuilder();
+            eab.Url = user.GetAvatarUrl();
+            eab.Name = $"{user.Username}#{user.Discriminator}";
+            eab.IconUrl = user.GetAvatarUrl();
+            em.Author = eab;
+            var joined = client.GetGuild(ConfigUtils.Configuration.ServerID).GetUser(user.Id).JoinedAt;
+            em.AddField("Registered: ", $"{user.CreatedAt.DateTime.ToLongDateString()} at {user.CreatedAt.DateTime.ToLongTimeString()}");
+            em.AddField("Joined: ", $"{joined.Value.DateTime.ToLongDateString()} at {joined.Value.DateTime.ToLongTimeString()}");
+            string nick = client.GetGuild(ConfigUtils.Configuration.ServerID).GetUser(user.Id).Nickname;
+            if (nick == null) { nick = "none"; }
+            em.AddField("Nickname: ", nick);
+            em.AddField("ID: ", user.Id.ToString());
+            string game = "none";
+            if (user.Game.HasValue)
+            {
+                game = user.Game.Value.Name;
+            }
+            em.AddField("Game: ", game);
+            string roles = "";
+            int i = 0;
+            foreach (SocketRole role in client.GetGuild(ConfigUtils.Configuration.ServerID).GetUser(user.Id).Roles)
+            {
+                roles += $"`{role.Name}`";
+                if (i < client.GetGuild(ConfigUtils.Configuration.ServerID).GetUser(user.Id).Roles.Count - 1)
+                {
+                    roles += ", ";
+                }
+                i++;
+            }
+            if (roles == "") { roles = "none"; }
+            em.AddField("Roles: ", roles);
+            if (user.IsBot)
+            {
+                em.AddField("Is a bot: ", "Yes");
+            }
+            else
+            {
+                em.AddField("Is a bot: ", "No");
+            }
             return em.Build();
         }
 
