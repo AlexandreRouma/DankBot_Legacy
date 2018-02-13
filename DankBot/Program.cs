@@ -12,6 +12,7 @@ using System.Net;
 using System.Drawing;
 using System.Text.RegularExpressions;
 using UrbanDictionnet;
+using Google.Apis.YouTube.v3.Data;
 
 namespace DankBot
 {
@@ -755,8 +756,17 @@ namespace DankBot
                             UrbanClient uc = new UrbanClient();
                             try
                             {
-                                WordDefine word = await uc.GetWordAsync(msg.Substring(6));
-                                await message.Channel.SendMessageAsync("", false, genUrban(word.FirstOrDefault()));
+                                string w = msg.Substring(6);
+                                DefinitionData word;
+                                if (w == "random")
+                                {
+                                    word = await uc.GetRandomWordAsync();
+                                }
+                                else
+                                {
+                                    word = (await uc.GetWordAsync(w)).FirstOrDefault();
+                                }
+                                await message.Channel.SendMessageAsync("", false, genUrban(word));
                             }
                             catch
                             {
@@ -768,8 +778,34 @@ namespace DankBot
                             await message.Channel.SendMessageAsync($":no_entry: `Tell me which word to search...`");
                         }
                         break;
+                    case "COMMENT":
+                        if (arg.Count() > 1)
+                        {
+                            try
+                            {
+                                YouTubeVideo video = YouTubeHelper.Search(msg.Substring(8));
+                                CommentThreadListResponse comments = YouTubeHelper.GetComments(video.Url.Substring(32));
+                                if (comments == null)
+                                {
+                                    await message.Channel.SendMessageAsync($":no_entry: `Could not list comments for this video`");
+                                }
+                                else
+                                {
+                                    await message.Channel.SendMessageAsync("", false, genYtComment(comments.Items.ElementAt(new Random().Next(comments.Items.Count)).Snippet.TopLevelComment.Snippet));
+                                    break;
+                                }
+                            }
+                            catch
+                            {
+                                await message.Channel.SendMessageAsync($":no_entry: `That video doesn't exist nigga`:joy:");
+                            }
+                        }
+                        else
+                        {
+                            await message.Channel.SendMessageAsync($":no_entry: `Please include a video link`");
+                        }
+                        break;
                     case "DEBUG":
-                        
                         break;
                     default:
                         await message.Channel.SendMessageAsync($":no_entry: `The command '{cmd}' is as legit as an OpticGaming player on this server :(`");
@@ -857,6 +893,22 @@ namespace DankBot
             emfb.Text = $"By {definition.Author}";
             em.Footer = emfb;
             em.Url = definition.Permalink;
+            return em.Build();
+        }
+
+        static Embed genYtComment(CommentSnippet comment)
+        {
+            EmbedBuilder em = new Discord.EmbedBuilder();
+            em.Color = Discord.Color.Blue;
+            EmbedAuthorBuilder eab = new EmbedAuthorBuilder();
+            eab.Url = comment.AuthorChannelUrl;
+            eab.Name = comment.AuthorDisplayName;
+            eab.IconUrl = comment.AuthorProfileImageUrl;
+            em.Author = eab;
+            EmbedFooterBuilder emfb = new EmbedFooterBuilder();
+            emfb.Text = $"{comment.LikeCount} likes";
+            em.Footer = emfb;
+            em.Description = comment.TextDisplay;
             return em.Build();
         }
 

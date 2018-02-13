@@ -27,11 +27,32 @@ namespace DankBot
             });
             var searchListRequest = youtubeService.Search.List("snippet");
             searchListRequest.Q = search; // Replace with your search term.
-            searchListRequest.MaxResults = 1;
+            searchListRequest.MaxResults = 10;
             var searchListResponse = searchListRequest.Execute();
-            video.Title = searchListResponse.Items.First().Snippet.Title;
-            video.Url = $"https://www.youtube.com/watch?v={searchListResponse.Items.First().Id.VideoId}";
-            return video;
+            foreach (SearchResult r in searchListResponse.Items)
+            {
+                if (r.Id.Kind == "youtube#video")
+                {
+                    video.Title = searchListResponse.Items.First().Snippet.Title;
+                    video.Url = $"https://www.youtube.com/watch?v={searchListResponse.Items.First().Id.VideoId}";
+                    return video;
+                }
+            }
+            throw new Exception("No results");
+        }
+
+        public static CommentThreadListResponse GetComments(string video)
+        {
+            var youtubeService = new YouTubeService(new BaseClientService.Initializer()
+            {
+                ApiKey = ConfigUtils.Configuration.YoutubeApiKey,
+                ApplicationName = "DankBot"
+            });
+            var playlistItem = new PlaylistItem();
+            var req = youtubeService.CommentThreads.List("snippet");
+            req.VideoId = video;
+            req.TextFormat = CommentThreadsResource.ListRequest.TextFormatEnum.PlainText;
+            return req.Execute();
         }
     }
 
