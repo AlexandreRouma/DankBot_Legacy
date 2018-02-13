@@ -87,3 +87,4 @@ D:\Documents\GitHub\DankBot\DankBot\obj\Debug\DankBot.pdb
 D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Google.Apis.Customsearch.v1.dll
 D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Google.Apis.Customsearch.v1.xml
 D:\Documents\GitHub\DankBot\DankBot\obj\Debug\DankBot.csproj.CoreCompileInputs.cache
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\System.Xml.ReaderWriter.dll
