@@ -38,6 +38,10 @@ namespace DankBot
 
             Logger.WriteLine("Welcome to DankBot !");
 
+            if (!Directory.Exists(@"resources\config\"))
+                Directory.CreateDirectory(@"resources\config\");
+
+
             if (!File.Exists(@"resources\config\config.json"))
             {
                 Logger.Write("Generating configuration... ");
@@ -766,6 +770,34 @@ namespace DankBot
                         else
                         {
                             await message.Channel.SendMessageAsync($":no_entry: `Tell me which word to search...`");
+                        }
+                        break;
+                    case "AESTHETIC":
+                        if (arg.Length == 2)
+                        {
+                            var originalAbc = "abcdefghijklmnopqrstuvwxyz1234567890";
+                            var abc = "ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ１２３４５６７８９０";
+                            var fancyString = "";
+
+                            foreach (var character in arg[1])
+                            {
+                                var index = originalAbc.IndexOf(character);
+                                if (index >= 0)
+                                {
+                                    fancyString += abc[index] + " ";
+                                }
+                                else
+                                {
+                                    fancyString += character + " ";
+                                }
+                            }
+                            fancyString = fancyString.Substring(0, fancyString.Length - 1);
+                            await message.Channel.SendMessageAsync($"{fancyString}");
+
+                        }
+                        else
+                        {
+                            await message.Channel.SendMessageAsync($":no_entry: `Tell me what to say...`");
                         }
                         break;
                     case "DEBUG":
