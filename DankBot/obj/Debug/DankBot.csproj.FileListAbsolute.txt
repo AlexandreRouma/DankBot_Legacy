@@ -146,16 +146,6 @@ D:\Documents\GitHub\DankBot\DankBot\bin\Debug\UnityEngine.dll
 D:\Documents\GitHub\DankBot\DankBot\bin\Debug\System.ValueTuple.xml
 D:\Documents\GitHub\DankBot\DankBot\bin\Debug\RestSharp.xml
 D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Common.Logging.dll
-D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Spring.Rest.dll
-D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Spring.Social.Core.dll
-D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Spring.Rest.pdb
-D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Spring.Rest.xml
-D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Spring.Social.Core.pdb
-D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Spring.Social.Core.xml
-D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Hammock.ClientProfile.dll
-D:\Documents\GitHub\DankBot\DankBot\bin\Debug\TweetSharp.dll
-D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Hammock.ClientProfile.pdb
-D:\Documents\GitHub\DankBot\DankBot\bin\Debug\TweetSharp.pdb
 D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Autofac.dll
 D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Nito.AsyncEx.Context.dll
 D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Nito.AsyncEx.Tasks.dll
