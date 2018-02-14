@@ -874,8 +874,25 @@ namespace DankBot
                             return;
                         }
                         break;
-                    case "DEBUG":
-                        
+                    case "JS":
+                        if (arg.Length > 1)
+                        {
+                            var words = new List<string>();
+                            words.AddRange(arg);
+                            words.RemoveAt(0);
+
+                            var source = String.Join(" ",words);
+                            var js = new JavascriptHelper();
+                            try
+                            {
+                                var oo = js.TryExecuteJs(source);
+                                await message.Channel.SendMessageAsync($"`Output:\n{oo}`");
+                            }
+                            catch (Exception ex)
+                            {
+                                await message.Channel.SendMessageAsync($":no_entry: `Got error: '{ex.Message}' `");
+                            }
+                        }
                         break;
                     default:
                         await message.Channel.SendMessageAsync($":no_entry: `The command '{cmd}' is as legit as an OpticGaming player on this server :(`");
