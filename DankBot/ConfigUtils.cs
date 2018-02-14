@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System.IO;
 using Discord;
+using Newtonsoft.Json;
+using Formatting = System.Xml.Formatting;
 
 namespace DankBot
 {
@@ -35,7 +35,7 @@ namespace DankBot
 
         public static void Save(string path)
         {
-            File.WriteAllText(path, JsonConvert.SerializeObject(Configuration, Formatting.Indented));
+            File.WriteAllText(path, JsonConvert.SerializeObject(Configuration, Newtonsoft.Json.Formatting.Indented));
         }
 
         public static void SetDefaults()
