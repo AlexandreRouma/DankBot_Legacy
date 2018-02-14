@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Discord;
 using Discord.WebSocket;
 using System.Threading;
-using System.Configuration;
 using System.IO;
 using System.Net;
 using System.Drawing;
@@ -14,6 +13,8 @@ using System.Text.RegularExpressions;
 using UrbanDictionnet;
 using Google.Apis.YouTube.v3.Data;
 using QRCoder;
+using Tweetinvi;
+using Tweetinvi.Models;
 
 namespace DankBot
 {
@@ -643,7 +644,7 @@ namespace DankBot
                         break;
                     case "UNDO":
                         var messages = await message.Channel.GetMessagesAsync(16).Flatten();
-                        foreach (IMessage ms in messages)
+                        foreach (Discord.IMessage ms in messages)
                         {
                             if (ms.Author.Mention == client.CurrentUser.Mention)
                             {
@@ -850,7 +851,31 @@ namespace DankBot
                         }
                         
                         break;
+                    case "LASTTWEET":
+                        if (arg.Count() > 1)
+                        {
+                            try
+                            {
+                                Auth.SetUserCredentials(ConfigUtils.Configuration.TwitterConsumerKey, 
+                                                        ConfigUtils.Configuration.TwitterConsumerSecret, 
+                                                        ConfigUtils.Configuration.TwitterAccessToken, 
+                                                        ConfigUtils.Configuration.TwitterAccessTokenSecret);
+                                await message.Channel.SendMessageAsync("", false, genTwitter(User.GetUserFromScreenName(msg.Substring(10)).GetUserTimeline(10).FirstOrDefault()));
+                            }
+                            catch
+                            {
+                                await message.Channel.SendMessageAsync($":no_entry: `Could not gather tweeter data for this user`");
+                            }
+                        }
+                        else
+                        {
+                            await message.Channel.SendMessageAsync($":no_entry: `Please enter the username of the twitter user`");
+                            type.Dispose();
+                            return;
+                        }
+                        break;
                     case "DEBUG":
+                        
                         break;
                     default:
                         await message.Channel.SendMessageAsync($":no_entry: `The command '{cmd}' is as legit as an OpticGaming player on this server :(`");
@@ -954,6 +979,23 @@ namespace DankBot
             emfb.Text = $"{comment.LikeCount} likes";
             em.Footer = emfb;
             em.Description = comment.TextDisplay;
+            return em.Build();
+        }
+
+        static Embed genTwitter(ITweet tweet)
+        {
+            EmbedBuilder em = new Discord.EmbedBuilder();
+            em.Color = Discord.Color.Blue;
+            EmbedAuthorBuilder eab = new EmbedAuthorBuilder();
+            eab.Url = $"https://twitter.com/{tweet.CreatedBy.ScreenName}";
+            eab.Name = $"{tweet.CreatedBy.Name} (@{tweet.CreatedBy.ScreenName})"; ;
+            eab.IconUrl = tweet.CreatedBy.ProfileImageUrlFullSize;
+            em.Author = eab;
+            EmbedFooterBuilder emfb = new EmbedFooterBuilder();
+            emfb.Text = $"{tweet.RetweetCount} Retweets, {tweet.FavoriteCount} Likes";
+            em.Footer = emfb;
+            em.Description = tweet.FullText;
+            em.Timestamp = new DateTimeOffset(tweet.CreatedAt);
             return em.Build();
         }
 
