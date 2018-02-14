@@ -13,6 +13,7 @@ using System.Drawing;
 using System.Text.RegularExpressions;
 using UrbanDictionnet;
 using Google.Apis.YouTube.v3.Data;
+using QRCoder;
 
 namespace DankBot
 {
@@ -836,6 +837,19 @@ namespace DankBot
                             await message.Channel.SendMessageAsync($":no_entry: `Tell me what to say...`");
                         }
                         break;
+                    case "QR":
+                        if (arg.Count() > 1)
+                        {
+                            new Thread(() => QRTask(message, msg.Substring(3))).Start();
+                        }
+                        else
+                        {
+                            await message.Channel.SendMessageAsync($":no_entry: `Please enter text for the QR code`");
+                            type.Dispose();
+                            return;
+                        }
+                        
+                        break;
                     case "DEBUG":
                         break;
                     default:
@@ -988,6 +1002,17 @@ namespace DankBot
             Bitmap img = (Bitmap)System.Drawing.Image.FromStream(new MemoryStream(file));
             string filename = $@"cache\{Convert.ToBase64String(Encoding.Default.GetBytes(GetSalt() + imgLink.Substring(0, 16))).Replace("/", "_")}.png";
             ImageHelper.USOAB(img).Save(filename);
+            message.Channel.SendFileAsync(filename).Wait();
+            File.Delete(filename);
+        }
+
+        static void QRTask(SocketMessage message, string data)
+        {
+            string filename = $@"cache\{Convert.ToBase64String(Encoding.Default.GetBytes(GetSalt() + data.Substring(0, Math.Min(16, data.Length - 1)))).Replace("/", "_")}.png";
+            QRCodeGenerator qrGenerator = new QRCodeGenerator();
+            QRCodeData qrCodeData = qrGenerator.CreateQrCode(data, QRCodeGenerator.ECCLevel.Q);
+            QRCode qrCode = new QRCode(qrCodeData);
+            qrCode.GetGraphic(20).Save(filename);
             message.Channel.SendFileAsync(filename).Wait();
             File.Delete(filename);
         }

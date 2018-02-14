@@ -90,7 +90,6 @@ D:\Documents\GitHub\DankBot\DankBot\obj\Debug\DankBot.csproj.CoreCompileInputs.c
 D:\Documents\GitHub\DankBot\DankBot\bin\Debug\System.Xml.ReaderWriter.dll
 D:\Documents\GitHub\DankBot\DankBot\bin\Debug\RestSharp.dll
 D:\Documents\GitHub\DankBot\DankBot\bin\Debug\UrbanDictionnet.dll
-D:\Documents\GitHub\DankBot\DankBot\bin\Debug\RestSharp.xml
 F:\Projects\DankBotGood\DankBot\bin\Debug\DankBot.exe.config
 F:\Projects\DankBotGood\DankBot\bin\Debug\DankBot.exe
 F:\Projects\DankBotGood\DankBot\bin\Debug\DankBot.pdb
@@ -141,3 +140,8 @@ F:\Projects\DankBotGood\DankBot\obj\Debug\DankBot.csprojResolveAssemblyReference
 F:\Projects\DankBotGood\DankBot\obj\Debug\DankBot.csproj.CoreCompileInputs.cache
 F:\Projects\DankBotGood\DankBot\obj\Debug\DankBot.exe
 F:\Projects\DankBotGood\DankBot\obj\Debug\DankBot.pdb
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\QRCoder.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\System.ValueTuple.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\UnityEngine.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\System.ValueTuple.xml
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\RestSharp.xml

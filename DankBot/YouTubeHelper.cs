@@ -52,6 +52,7 @@ namespace DankBot
             var req = youtubeService.CommentThreads.List("snippet");
             req.VideoId = video;
             req.TextFormat = CommentThreadsResource.ListRequest.TextFormatEnum.PlainText;
+            req.MaxResults = 100;
             return req.Execute();
         }
     }
