@@ -25,7 +25,7 @@ namespace DankBot
 
         public static async Task Setgame(SocketMessage message, string[] arg, string msg)
         {
-            if (!RoleUtils.IsUserBotAdmin(message.Author.Id))
+            if (RoleUtils.IsUserBotAdmin(message.Author.Id))
             {
                 try
                 {

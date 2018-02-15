@@ -50,18 +50,19 @@ namespace DankBot
             commands.Add("WTF", ImageCommands.WTF);
             commands.Add("WINK", ImageCommands.Wink);
             commands.Add("HSGTF", ImageCommands.Hsgtf);
-            commands.Add("WTH", ImageCommands.Hsgtf);
-            commands.Add("USOAB", ImageCommands.Hsgtf);
+            commands.Add("WTH", ImageCommands.Wth);
+            commands.Add("USOAB", ImageCommands.Usoab);
             commands.Add("QR", ImageCommands.QR);
 
             // Misc Commands
             commands.Add("SAY", MiscCommands.Say);
             commands.Add("RANDOM", MiscCommands.Random);
             commands.Add("UNDO", MiscCommands.Undo);
-            commands.Add("PLZHALP", MiscCommands.Say);
-            commands.Add("AESTHETIC", MiscCommands.Say);
-            commands.Add("B64ENCODE", MiscCommands.Say);
-            commands.Add("B64DECODE", MiscCommands.Say);
+            commands.Add("PLZHALP", MiscCommands.Plzhalp);
+            commands.Add("AESTHETIC", MiscCommands.Aesthetic);
+            commands.Add("B64ENCODE", MiscCommands.B64Encode);
+            commands.Add("B64DECODE", MiscCommands.B64Decode);
+            commands.Add("RUN", MiscCommands.Run);
         }
 
         public static async Task MessageReceived(SocketMessage message)
@@ -109,38 +110,7 @@ namespace DankBot
 
         public static async Task DEBUG(SocketMessage message, string[] arg, string msg)
         {
-            await message.Channel.SendMessageAsync("", false, genCodeResult(await RextesterHelper.runCodeAsync(msg.Substring(6), 5), message.Author));
-        }
-
-        static Embed genCodeResult(RextesterResponse result, SocketUser author)
-        {
-            EmbedBuilder em = new Discord.EmbedBuilder();
-            em.Color = Discord.Color.Blue;
-            EmbedAuthorBuilder eab = new EmbedAuthorBuilder();
-            eab.Name = $"{author.Username}#{author.Discriminator}'s Code Result";
-            eab.IconUrl = author.GetAvatarUrl();
-            em.Author = eab;
-            if (result.Result != "")
-            {
-                if (result.Result.Length > 2042)
-                {
-                    result.Result = $"{result.Result.Substring(0, 2039)}...";
-                }
-                em.Description = $"```{result.Result}```";
-            }
-            if (result.Errors != null)
-            {
-                em.AddField("Errors:", $"```{result.Errors}```");
-            }
-            if (result.Warnings != null)
-            {
-                em.AddField("Warnings:", $"```{result.Warnings}```");
-            }
-            if(result.Stats != "")
-            {
-                em.AddField("Stats:", result.Stats);
-            }
-            return em.Build();
+            await message.Channel.SendMessageAsync($":no_entry: `NO IMPLEMENTED YET`");
         }
 
         static Embed generateTest()

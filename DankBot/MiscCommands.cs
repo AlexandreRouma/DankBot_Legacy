@@ -68,10 +68,10 @@ namespace DankBot
         {
             if (arg.Length > 1)
             {
-                var originalAbc = "abcdefghijklmnopqrstuvwxyz1234567890 ";
+                var originalAbc = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 ";
                 var abc = "ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ１２３４５６７８９０\t";
                 var fancyString = "";
-                foreach (var character in arg[1])
+                foreach (var character in msg.Substring(10).ToUpper())
                 {
                     var index = originalAbc.IndexOf(character);
                     if (index >= 0)
@@ -115,6 +115,80 @@ namespace DankBot
             {
                 await message.Channel.SendMessageAsync($":no_entry: `Please say what you want me to encode...`");
             }
+        }
+
+        public static async Task Run(SocketMessage message, string[] arg, string msg)
+        {
+            if (arg.Count() > 2)
+            {
+                int id = 0;
+                RextesterHelper.languages.TryGetValue(arg[1].ToLower(), out id);
+                if (id != 0)
+                {
+                    RextesterResponse result = await RextesterHelper.runCodeAsync(msg.Substring(5 + arg[1].Length), id);
+                    if (result.Result != "" && result.Result != null)
+                    {
+                        if (result.Result.Length > 1994)
+                        {
+                            result.Result = $"{result.Result.Substring(0, 1991)}...";
+                        }
+                        await message.Channel.SendMessageAsync($"```{result.Result}```");
+                    }
+                    await message.Channel.SendMessageAsync("", false, genCodeResult(result, message.Author));
+                }
+                else
+                {
+                    await message.Channel.SendMessageAsync($":no_entry: `Unknown language: {arg[1]}`");
+                }
+            }
+            else if (arg.Count() > 1 && arg[1].ToUpper() == "LIST")
+            {
+                await message.Channel.SendMessageAsync("", false, genLangList());
+            }
+            else
+            {
+                await message.Channel.SendMessageAsync($":no_entry: `Please include language name and code`");
+            }
+
+        }
+
+
+
+        static Embed genCodeResult(RextesterResponse result, SocketUser author)
+        {
+            EmbedBuilder em = new EmbedBuilder();
+            em.Color = Color.Blue;
+            EmbedAuthorBuilder eab = new EmbedAuthorBuilder();
+            eab.Name = $"{author.Username}#{author.Discriminator}'s Code Result";
+            eab.IconUrl = author.GetAvatarUrl();
+            em.Author = eab;
+            if (result.Errors != null)
+            {
+                em.AddField("Errors:", $"```{result.Errors}```");
+            }
+            if (result.Warnings != null)
+            {
+                em.AddField("Warnings:", $"```{result.Warnings}```");
+            }
+            if (result.Stats != "")
+            {
+                em.AddField("Stats:", result.Stats);
+            }
+            return em.Build();
+        }
+
+        static Embed genLangList()
+        {
+            EmbedBuilder em = new Discord.EmbedBuilder();
+            em.Color = Discord.Color.Blue;
+            em.Title = "Supported Languages:";
+            string str = "";
+            foreach (KeyValuePair<string, int> key in RextesterHelper.languages)
+            {
+                str += $"{key.Key}\n";
+            }
+            em.Description = str;
+            return em.Build();
         }
     }
 }
