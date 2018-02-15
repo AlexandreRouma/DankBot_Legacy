@@ -37,6 +37,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="0Zero.SandBox, Version=1.1.5735.18757, Culture=neutral, PublicKeyToken=e1d238395e5bc103, processorArchitecture=MSIL">
+      <HintPath>..\packages\0Zero.SandBox.1.1.1\lib\net40\0Zero.SandBox.dll</HintPath>
+    </Reference>
     <Reference Include="Autofac, Version=4.6.2.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\packages\Autofac.4.6.2\lib\net45\Autofac.dll</HintPath>
     </Reference>
@@ -184,13 +187,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminCommands.cs" />
+    <Compile Include="CommandManager.cs" />
     <Compile Include="ConfigUtils.cs" />
+    <Compile Include="FileUtils.cs" />
     <Compile Include="GoogleHelper.cs" />
+    <Compile Include="ImageCommands.cs" />
     <Compile Include="ImageHelper.cs" />
     <Compile Include="Logger.cs" />
+    <Compile Include="MiscCommands.cs" />
+    <Compile Include="OLD_COMMANDS.cs" />
     <Compile Include="Playlist.cs" />
+    <Compile Include="AudioCommands.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RextesterHelper.cs" />
+    <Compile Include="RoleUtils.cs" />
+    <Compile Include="SearchCommands.cs" />
     <Compile Include="YouTubeHelper.cs" />
   </ItemGroup>
   <ItemGroup>

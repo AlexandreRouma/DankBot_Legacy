@@ -167,3 +167,4 @@ D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Microsoft.Threading.Tasks.Extensio
 D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Microsoft.Threading.Tasks.Extensions.Desktop.xml
 D:\Documents\GitHub\DankBot\DankBot\bin\Debug\System.Net.Http.Extensions.xml
 D:\Documents\GitHub\DankBot\DankBot\bin\Debug\System.Net.Http.Primitives.xml
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\0Zero.SandBox.dll
