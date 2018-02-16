@@ -18,12 +18,40 @@ namespace DankBot
         {
             if (arg.Count() > 1)
             {
-                Google.Apis.Customsearch.v1.Data.Result r = GoogleHelper.Search(msg.Substring(2));
-                await message.Channel.SendMessageAsync("", false, GenGoogleEmbed(r.Title, r.Link, r.Snippet));
+                try
+                {
+                    Google.Apis.Customsearch.v1.Data.Result r = GoogleHelper.Search(msg.Substring(2), !message.Channel.IsNsfw);
+                    await message.Channel.SendMessageAsync("", false, GenGoogleEmbed(r.Title, r.Link, r.Snippet));
+                }
+                catch
+                {
+                    await message.Channel.SendMessageAsync($":no_entry: `No results found`");
+                }
+                
             }
             else
             {
                 await message.Channel.SendMessageAsync($":white_check_mark: `Please enter a search term`");
+            }
+        }
+
+        public static async Task Image(SocketMessage message, string[] arg, string msg)
+        {
+            if (arg.Count() > 1)
+            {
+                try
+                {
+                    Google.Apis.Customsearch.v1.Data.Result r = GoogleHelper.SearchImage(msg.Substring(2), !message.Channel.IsNsfw);
+                    await message.Channel.SendMessageAsync(r.Link);
+                }
+                catch
+                {
+                    await message.Channel.SendMessageAsync($":no_entry: `No results found`");
+                }
+            }
+            else
+            {
+                await message.Channel.SendMessageAsync($":no_entry: `Please enter a search term`");
             }
         }
 

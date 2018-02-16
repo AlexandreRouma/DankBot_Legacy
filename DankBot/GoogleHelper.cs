@@ -18,7 +18,7 @@ namespace DankBot
 {
     class GoogleHelper
     {
-        public static Result Search(string search)
+        public static Result Search(string search, bool safe = false)
         {
             var googleService = new CustomsearchService(new BaseClientService.Initializer()
             {
@@ -28,12 +28,13 @@ namespace DankBot
 
             var listRequest = googleService.Cse.List(search);
             listRequest.Cx = "009590618107170545812:chu7p8sc1ie";
+            if (safe) { listRequest.Safe = CseResource.ListRequest.SafeEnum.Medium; };
             var src = listRequest.Execute();
 
             return src.Items.FirstOrDefault();
         }
 
-        public static Result SearchImage(string search)
+        public static Result SearchImage(string search, bool safe = false)
         {
             var googleService = new CustomsearchService(new BaseClientService.Initializer()
             {
@@ -42,8 +43,9 @@ namespace DankBot
             });
 
             var listRequest = googleService.Cse.List(search);
-            listRequest.FileType = "png";
             listRequest.Cx = "009590618107170545812:vkajuihze6m";
+            listRequest.SearchType = CseResource.ListRequest.SearchTypeEnum.Image;
+            if (safe) { listRequest.Safe = CseResource.ListRequest.SafeEnum.Medium; };
             var src = listRequest.Execute();
 
             return src.Items.FirstOrDefault();

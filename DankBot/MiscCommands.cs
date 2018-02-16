@@ -117,6 +117,81 @@ namespace DankBot
             }
         }
 
+        public static Dictionary<char, char> leet_speak = new Dictionary<char, char>
+        {
+            { 'a', '4' },
+            { 'e', '3' },
+            { 'i', '1' },
+            { 'l', '1' },
+            { 'o', '0' },
+            { 's', '5' },
+            { 't', '7' },
+            { 'z', '2' },
+        };
+
+        public static async Task Leet(SocketMessage message, string[] arg, string msg)
+        {
+            if (arg.Count() > 1)
+            {
+                string str = "";
+                foreach (char c in msg.Substring(5).ToLower())
+                {
+                    char r = (char)0;
+                    leet_speak.TryGetValue(c, out r);
+                    if (r == 0)
+                    {
+                        r = c;
+                    }
+                    str += r;
+                }
+                await message.Channel.SendMessageAsync($"```{str}```");
+            }
+            else
+            {
+                await message.Channel.SendMessageAsync($":no_entry: `Please say what you want me to encode...`");
+            }
+        }
+
+        public static string[] because = { "Because of china.",
+                                           "Because you're gay.",
+                                           "Because you have cancer.",
+                                           "Because of jake paul.",
+                                           "Because of hitler.",
+                                           "Because jetfuel can't melt steel beams",
+                                           "Because mans not hot",
+                                           "because GJ got banned"};
+
+        public static async Task Why(SocketMessage message, string[] arg, string msg)
+        {
+            await message.Channel.SendMessageAsync($"`{because[new Random().Next(0, because.Count())]}`");
+        }
+
+        public static async Task Mock(SocketMessage message, string[] arg, string msg)
+        {
+            if (arg.Count() > 1)
+            {
+                string str = "";
+                Random rng = new Random();
+                foreach (char c in msg.Substring(5).ToLower())
+                {
+                    if (rng.Next(2) == 0)
+                    {
+                        str += $"{c}".ToUpper();
+                    }
+                    else
+                    {
+                        str += $"{c}".ToLower();
+                    }
+                    
+                }
+                await message.Channel.SendMessageAsync($"```{str}```");
+            }
+            else
+            {
+                await message.Channel.SendMessageAsync($":no_entry: `Please enter a string`");
+            }
+        }
+
         public static async Task Run(SocketMessage message, string[] arg, string msg)
         {
             if (arg.Count() > 2)

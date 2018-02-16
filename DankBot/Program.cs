@@ -21,14 +21,7 @@ namespace DankBot
 {
     class Program
     {
-        public static string[] because = { "Because of china.",
-                                           "Because you're gay.",
-                                           "Because you have cancer.",
-                                           "Because of jake paul.",
-                                           "Because of hitler.",
-                                           "Because jetfuel can't melt steel beams",
-                                           "Because mans not hot",
-                                           "because GJ got banned"};
+        
 
         public static DiscordSocketClient client = new DiscordSocketClient();
 
@@ -44,7 +37,8 @@ namespace DankBot
 
             if (!Directory.Exists(@"resources\config\"))
                 Directory.CreateDirectory(@"resources\config\");
-
+            if (!Directory.Exists(@"cache"))
+                Directory.CreateDirectory(@"cache");
 
             if (!File.Exists(@"resources\config\config.json"))
             {

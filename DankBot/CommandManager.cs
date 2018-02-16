@@ -20,6 +20,7 @@ namespace DankBot
 
             // Search Commands
             commands.Add("GOOGLE", SearchCommands.Google);
+            commands.Add("IMAGE", SearchCommands.Image);
             commands.Add("YOUTUBE", SearchCommands.Youtube);
             commands.Add("URBAN", SearchCommands.Urban);
             commands.Add("COMMENT", SearchCommands.Comment);
@@ -63,6 +64,9 @@ namespace DankBot
             commands.Add("B64ENCODE", MiscCommands.B64Encode);
             commands.Add("B64DECODE", MiscCommands.B64Decode);
             commands.Add("RUN", MiscCommands.Run);
+            commands.Add("LEET", MiscCommands.Leet);
+            commands.Add("MOCK", MiscCommands.Mock);
+            commands.Add("WHY", MiscCommands.Why);
         }
 
         public static async Task MessageReceived(SocketMessage message)
