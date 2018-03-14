@@ -25,6 +25,7 @@ namespace DankBot
         public static string DEFAULT_TWITTERATOKENSECRET = "[ENTER TWITTER ACCESS TOKEN SECRET HERE]";
         public static ulong DEFAULT_SERVERID = 0;
         public static ulong[] DEFAULT_ADMINROLES = { 0 };
+        public static bool DEFAULT_RESOURCECACHING = true;
 
         public static Config Configuration = new Config();
 
@@ -53,6 +54,7 @@ namespace DankBot
             Configuration.TwitterAccessTokenSecret = DEFAULT_TWITTERATOKENSECRET;
             Configuration.ServerID = DEFAULT_SERVERID;
             Configuration.AdminRoles = DEFAULT_ADMINROLES;
+            Configuration.ResourceCaching = DEFAULT_RESOURCECACHING;
         }
     }
 
@@ -71,5 +73,6 @@ namespace DankBot
         public string TwitterAccessTokenSecret;
         public ulong ServerID;
         public ulong[] AdminRoles;
+        public bool ResourceCaching;
     }
 }

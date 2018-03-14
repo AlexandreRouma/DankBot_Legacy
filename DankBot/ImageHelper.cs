@@ -118,7 +118,15 @@ namespace DankBot
             foreach (char c in str)
             {
                 ResourceCache.resources.TryGetValue($"elians_script_{c}", out elians_c);
-                elians_i = (System.Drawing.Image)elians_c.item;
+                if (ConfigUtils.Configuration.ResourceCaching)
+                {
+                    elians_i = (System.Drawing.Image)elians_c.item;
+                }
+                else
+                {
+                    elians_i = System.Drawing.Image.FromFile(elians_c.filename);
+                }
+                
                 g.DrawImage(elians_i, x, 0, 200, 200);
                 x += 200;
             }
