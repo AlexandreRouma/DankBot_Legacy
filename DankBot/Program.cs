@@ -82,6 +82,17 @@ namespace DankBot
                 Logger.FAILED();
                 Panic(ex.Message);
             }
+            Logger.Write("Loading resources...        ");
+            try
+            {
+                ResourceCache.Load();
+                Logger.OK();
+            }
+            catch (Exception ex)
+            {
+                Logger.FAILED();
+                Panic(ex.Message);
+            }
 
             Logger.Write("Starting message handler... ");
             try

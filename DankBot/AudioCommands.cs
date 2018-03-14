@@ -72,20 +72,20 @@ namespace DankBot
             if (!Playlist.SkipVotes.Contains(message.Author.Id))
             {
                 Playlist.SkipVotes.Add(message.Author.Id);
-                if (Playlist.SkipVotes.Count() > (await schannel.GetUsersAsync().Count()) / 2)
+                int c = (int)Math.Ceiling(((double)await schannel.GetUsersAsync().Count() / 2));
+                if (Playlist.SkipVotes.Count() >= c)
                 {
                     Playlist.Skip();
                 }
                 else
                 {
-                    await message.Channel.SendMessageAsync($":white_check_mark: `'Your vote has been added. {(await schannel.GetUsersAsync().Count()) / 2 - Playlist.SkipVotes.Count()} more votes needed`");
+                    await message.Channel.SendMessageAsync($":white_check_mark: `'Your vote has been added. {c - Playlist.SkipVotes.Count()} more votes needed`");
                 }
             }
             else
             {
                 await message.Channel.SendMessageAsync($":no_entry: `You already voted...`");
             }
-            Playlist.Skip();
         }
 
         public static async Task PlayList(SocketMessage message, string[] arg, string msg)
@@ -129,6 +129,19 @@ namespace DankBot
             catch
             {
                 await message.Channel.SendMessageAsync($":no_entry: `Invalid song id` :thinking:");
+            }
+        }
+
+        public static async Task Stop(SocketMessage message, string[] arg, string msg)
+        {
+            try
+            {
+                Playlist.files.Clear();
+                Playlist.Skip();
+            }
+            catch
+            {
+                await message.Channel.SendMessageAsync($":no_entry: `Could not quit singing` :thinking:");
             }
         }
 

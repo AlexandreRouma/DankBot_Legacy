@@ -201,6 +201,7 @@
     <Compile Include="AudioCommands.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourceCache.cs" />
     <Compile Include="RextesterHelper.cs" />
     <Compile Include="RoleUtils.cs" />
     <Compile Include="SearchCommands.cs" />

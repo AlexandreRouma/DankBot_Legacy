@@ -96,7 +96,11 @@ namespace DankBot
                     ffmpeg.WaitForExit();
                     if (!Loop)
                     {
-                        files.RemoveAt(0);
+                        try
+                        {
+                            files.RemoveAt(0);
+                        }
+                        catch { }
                     }
                     if (files.Count == 0)
                     {
@@ -144,7 +148,7 @@ namespace DankBot
             var youtubedl = new ProcessStartInfo
             {
                 FileName = @"resources\utils\youtube-dl\youtube-dl.exe",
-                Arguments = $@"{url} -q --no-warnings -o -",
+                Arguments = $@"{url} -q --no-warnings --audio-format best -o -",
                 UseShellExecute = false,
                 RedirectStandardOutput = true,
                 RedirectStandardError = true

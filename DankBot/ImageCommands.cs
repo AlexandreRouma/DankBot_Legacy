@@ -117,5 +117,21 @@ namespace DankBot
                 await message.Channel.SendMessageAsync($":no_entry: `Please enter text for the QR code`");
             }
         }
+
+        public static async Task Elians(SocketMessage message, string[] arg, string msg)
+        {
+            if (arg.Count() > 1)
+            {
+                string data = msg.Substring(7);
+                string filename = $@"cache\{FileUtils.RandomFilename(data)}.png";
+                ImageHelper.ELIANS(data).Save(filename);
+                message.Channel.SendFileAsync(filename).Wait();
+                File.Delete(filename);
+            }
+            else
+            {
+                await message.Channel.SendMessageAsync($":no_entry: `Please enter text for the QR code`");
+            }
+        }
     }
 }

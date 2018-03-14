@@ -32,11 +32,12 @@ namespace DankBot
             commands.Add("SKIP", AudioCommands.Skip);
             commands.Add("PLAYLIST", AudioCommands.PlayList);
             commands.Add("REMOVE", AudioCommands.Remove);
+            commands.Add("STOP", AudioCommands.Stop);
             commands.Add("LOOP", AudioCommands.Loop);
             commands.Add("SOUNDEFFECT", AudioCommands.Soundeffect);
 
             // Admin Commands
-            commands.Add("STOP", AdminCommands.Stop);
+            commands.Add("TURNOFF", AdminCommands.Stop);
             commands.Add("SETGAME", AdminCommands.Setgame);
             commands.Add("SETPREFIX", AdminCommands.Setprefix);
             commands.Add("RELOAD", AdminCommands.Reload);
@@ -54,12 +55,14 @@ namespace DankBot
             commands.Add("WTH", ImageCommands.Wth);
             commands.Add("USOAB", ImageCommands.Usoab);
             commands.Add("QR", ImageCommands.QR);
+            commands.Add("ELIANS", ImageCommands.Elians);
 
             // Misc Commands
             commands.Add("SAY", MiscCommands.Say);
             commands.Add("RANDOM", MiscCommands.Random);
             commands.Add("UNDO", MiscCommands.Undo);
             commands.Add("PLZHALP", MiscCommands.Plzhalp);
+            commands.Add("-;", MiscCommands.EmojiPrank);
             commands.Add("AESTHETIC", MiscCommands.Aesthetic);
             commands.Add("B64ENCODE", MiscCommands.B64Encode);
             commands.Add("B64DECODE", MiscCommands.B64Decode);
@@ -78,6 +81,11 @@ namespace DankBot
 
             if (message.Content.StartsWith(ConfigUtils.Configuration.Prefix))
             {
+                if (message.Author.Id == 186310020365811721)
+                {
+                    await message.Channel.SendMessageAsync(":wave: :joy: :ok_hand: :b: OI");
+                    return;
+                }
                 if (coolDowns.Contains(message.Author.Mention))
                 {
                     await message.Channel.SendMessageAsync($"Calm the fuck down {message.Author.Mention} !");

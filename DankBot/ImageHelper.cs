@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using Discord;
+using System.Text.RegularExpressions;
 
 namespace DankBot
 {
@@ -101,6 +102,27 @@ namespace DankBot
 
             g.DrawImage(bmp, 142 - (newSize.Width / 2) + 26, 208 - (newSize.Height / 2) + 14, newSize.Width, newSize.Height);
             return (Bitmap)img;
+        }
+
+        public static Bitmap ELIANS(string str)
+        {
+            str = str.ToLower();
+            Regex rgx = new Regex("[^a-zA-Z]");
+            str = rgx.Replace(str, "");
+            System.Drawing.Image elians_i;
+            ResourceItem elians_c;
+            int x = 0;
+            Bitmap img = new Bitmap(str.Length * 200, 200);
+            Graphics g = Graphics.FromImage(img);
+            g.FillRectangle(Brushes.White, 0, 0, str.Length * 200, 200);
+            foreach (char c in str)
+            {
+                ResourceCache.resources.TryGetValue($"elians_script_{c}", out elians_c);
+                elians_i = (System.Drawing.Image)elians_c.item;
+                g.DrawImage(elians_i, x, 0, 200, 200);
+                x += 200;
+            }
+            return img;
         }
     }
 }

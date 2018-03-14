@@ -64,6 +64,11 @@ namespace DankBot
             await message.Channel.SendMessageAsync("https://github.com/AlexandreRouma/DankBot/wiki/Command-List");
         }
 
+        public static async Task EmojiPrank(SocketMessage message, string[] arg, string msg)
+        {
+            await message.Channel.SendMessageAsync($"HA ! You just got ppprrrraaaannnkkkeeeedddd XDDDDDD");
+        }
+
         public static async Task Aesthetic(SocketMessage message, string[] arg, string msg)
         {
             if (arg.Length > 1)
