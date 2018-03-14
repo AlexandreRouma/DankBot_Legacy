@@ -5,3 +5,4 @@ Special thanks to:
 
 * Dewyer
 * Hollexian
+* Mythical Wolf
