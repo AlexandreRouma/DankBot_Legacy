@@ -240,7 +240,7 @@ namespace DankBot
             {
                 try
                 {
-                    Expression e = new Expression(msg.Substring(10));
+                    Expression e = new Expression(msg.Substring(10).ToLower());
                     await message.Channel.SendMessageAsync($"```{msg.Substring(10)} = {e.calculate()}```");
                 }
                 catch

@@ -106,6 +106,7 @@ namespace DankBot
 
         public static Bitmap ELIANS(string str)
         {
+            string b = str;
             str = str.ToLower();
             Regex rgx = new Regex("[^a-zA-Z]");
             str = rgx.Replace(str, "");

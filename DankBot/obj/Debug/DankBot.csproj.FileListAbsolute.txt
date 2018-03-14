@@ -78,7 +78,6 @@ D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Google.Apis.Core.xml
 D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Google.Apis.YouTube.v3.xml
 D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Microsoft.Extensions.DependencyInjection.xml
 D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.xml
-D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Newtonsoft.Json.xml
 D:\Documents\GitHub\DankBot\DankBot\bin\Debug\System.Collections.Immutable.xml
 D:\Documents\GitHub\DankBot\DankBot\bin\Debug\System.Interactive.Async.xml
 D:\Documents\GitHub\DankBot\DankBot\obj\Debug\DankBot.csprojResolveAssemblyReference.cache
@@ -169,3 +168,18 @@ D:\Documents\GitHub\DankBot\DankBot\bin\Debug\System.Net.Http.Extensions.xml
 D:\Documents\GitHub\DankBot\DankBot\bin\Debug\System.Net.Http.Primitives.xml
 D:\Documents\GitHub\DankBot\DankBot\bin\Debug\0Zero.SandBox.dll
 D:\Documents\GitHub\DankBot\DankBot\bin\Debug\MathParser.org-mXparser.Net46.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Common.Logging.Core.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Tweetinvi.Controllers.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Tweetinvi.Core.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Tweetinvi.Credentials.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Tweetinvi.Factories.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Tweetinvi.Logic.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Tweetinvi.Security.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Tweetinvi.Streams.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Tweetinvi.WebLogic.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Common.Logging.pdb
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Common.Logging.xml
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Common.Logging.Core.pdb
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Common.Logging.Core.xml
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\DuckDuckGo.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Newtonsoft.Json.xml
