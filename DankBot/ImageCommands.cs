@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -120,17 +121,34 @@ namespace DankBot
 
         public static async Task Elians(SocketMessage message, string[] arg, string msg)
         {
+           
             if (arg.Count() > 1)
             {
                 string data = msg.Substring(7);
+                foreach (char c in data.ToUpper())
+                {
+                    if ((c > 0x90 || c < 0x41) && c != 0x20)
+                    {
+                        await message.Channel.SendMessageAsync($":no_entry: `Invalid character: '{c}'`");
+                        return;
+                    }
+                }
+                data = data.ToLower();
+                Regex rgx = new Regex("[a-zA-Z -]");
+                string sanitized = "";
+                foreach (Match m in rgx.Matches(data))
+                {
+                    sanitized += m.Value;
+                }
+                sanitized = sanitized.TrimStart(' ').TrimEnd(' ');
                 string filename = $@"cache\{FileUtils.RandomFilename(data)}.png";
-                ImageHelper.ELIANS(data).Save(filename);
+                ImageHelper.ELIANS(sanitized).Save(filename);
                 message.Channel.SendFileAsync(filename).Wait();
                 File.Delete(filename);
             }
             else
             {
-                await message.Channel.SendMessageAsync($":no_entry: `Please enter text for the QR code`");
+                await message.Channel.SendMessageAsync($":no_entry: `Please enter text to translate into elians script`");
             }
         }
     }

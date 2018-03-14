@@ -106,10 +106,6 @@ namespace DankBot
 
         public static Bitmap ELIANS(string str)
         {
-            string b = str;
-            str = str.ToLower();
-            Regex rgx = new Regex("[^a-zA-Z]");
-            str = rgx.Replace(str, "");
             System.Drawing.Image elians_i;
             ResourceItem elians_c;
             int x = 0;
@@ -118,18 +114,25 @@ namespace DankBot
             g.FillRectangle(Brushes.White, 0, 0, str.Length * 200, 200);
             foreach (char c in str)
             {
-                ResourceCache.resources.TryGetValue($"elians_script_{c}", out elians_c);
-                if (ConfigUtils.Configuration.ResourceCaching)
+                if (c == ' ')
                 {
-                    elians_i = (System.Drawing.Image)elians_c.item;
+                    x += 200;
                 }
                 else
                 {
-                    elians_i = System.Drawing.Image.FromFile(elians_c.filename);
+                    ResourceCache.resources.TryGetValue($"elians_script_{c}", out elians_c);
+                    if (ConfigUtils.Configuration.ResourceCaching)
+                    {
+                        elians_i = (System.Drawing.Image)elians_c.item;
+                    }
+                    else
+                    {
+                        elians_i = System.Drawing.Image.FromFile(elians_c.filename);
+                    }
+
+                    g.DrawImage(elians_i, x, 0, 200, 200);
+                    x += 200;
                 }
-                
-                g.DrawImage(elians_i, x, 0, 200, 200);
-                x += 200;
             }
             return img;
         }
