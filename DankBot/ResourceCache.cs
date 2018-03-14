@@ -43,7 +43,14 @@ namespace DankBot
 
         public static ResourceItem GetImageItem(string filename)
         {
-            return new ResourceItem(filename, Image.FromFile(filename));
+            if (ConfigUtils.Configuration.ResourceCaching)
+            {
+                return new ResourceItem(filename, Image.FromFile(filename));
+            }
+            else
+            {
+                return new ResourceItem(filename, null);
+            }
         }
     }
 

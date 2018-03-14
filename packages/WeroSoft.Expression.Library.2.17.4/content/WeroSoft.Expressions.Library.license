@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ProductLicense xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://weroSoft.net/Contracts/Data">
+  <DateOfIssue>12/06/2015</DateOfIssue>
+  <IssuerName>weroSoft AG</IssuerName>
+  <Level>Product</Level>
+  <Name>weroSoft Expression Library</Name>
+  <PartDetailItems>
+    <LicenseConfigurationItem>
+      <Key>TypeResolving</Key>
+      <Value>Unlimited</Value>
+    </LicenseConfigurationItem>
+  </PartDetailItems>
+  <PartId>2B32106C-68F8-483B-9EEC-FF3FA4904355</PartId>
+  <Remarks i:nil="true" />
+  <SerialNumber>527339c8-c4f1-4de3-94c7-854b2d131921-151206102140</SerialNumber>
+  <ShortName>ExpressionLibraryOpenLicense</ShortName>
+  <Signature>DZRIZEmBLhf5rn9/cYkM4jCBZv+JMTBrguAP6y7Li50SgxwGpQsBy1x4gVGWSv+9TIkTN87jNjwums3JL8R/ualWNqC0cRkfBjHAY51EUuGbW9EUg3rf9qNiIhnKdY3LLAEbEztnd+y0f8uGEBOuQDLRAETS6jeIrww0g9G0zo4=</Signature>
+  <StructureVersion>1</StructureVersion>
+  <Type>Demo</Type>
+  <Validity i:nil="true" />
+  <Verifying>cxwp81wHZoQWii//wgGAJA==</Verifying>
+  <Licensee>Public demo license</Licensee>
+  <ModuleItems i:nil="true" />
+</ProductLicense>

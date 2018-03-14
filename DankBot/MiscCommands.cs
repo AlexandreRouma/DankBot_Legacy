@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WeroSoft.Expressions;
 
 namespace DankBot
 {
@@ -228,6 +229,38 @@ namespace DankBot
             else
             {
                 await message.Channel.SendMessageAsync($":no_entry: `Please include language name and code`");
+            }
+
+        }
+
+        public static async Task Calculate(SocketMessage message, string[] arg, string msg)
+        {
+            if (arg.Count() > 1)
+            {
+                try
+                {
+                    ExpressionManager expressionManager = new ExpressionManager();
+                    IExpression expression = new Expression(msg.Substring(10));
+                    expressionManager.EvaluateExpression(expression);
+                    int Result = (int)expression.Value;
+
+                    if (expression.Value != null)
+                    {
+                        await message.Channel.SendMessageAsync(Result.ToString());
+                    }
+                    else
+                    {
+                        await message.Channel.SendMessageAsync($":no_entry: `Could not evaluate expression` :computer:");
+                    }
+                }
+                catch
+                {
+                    await message.Channel.SendMessageAsync($":no_entry: `Could not evaluate expression` :computer:");
+                }
+            }
+            else
+            {
+                await message.Channel.SendMessageAsync($":no_entry: `Please enter math expression to evaluate`");
             }
 
         }

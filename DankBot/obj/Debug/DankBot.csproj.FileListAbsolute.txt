@@ -168,3 +168,7 @@ D:\Documents\GitHub\DankBot\DankBot\bin\Debug\Microsoft.Threading.Tasks.Extensio
 D:\Documents\GitHub\DankBot\DankBot\bin\Debug\System.Net.Http.Extensions.xml
 D:\Documents\GitHub\DankBot\DankBot\bin\Debug\System.Net.Http.Primitives.xml
 D:\Documents\GitHub\DankBot\DankBot\bin\Debug\0Zero.SandBox.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\WeroSoft.Expressions.Library.license
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\WeroSoft.Core.Library.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\WeroSoft.Expressions.Library.dll
+D:\Documents\GitHub\DankBot\DankBot\bin\Debug\WeroSoft.Expressions.Operators.Library.dll

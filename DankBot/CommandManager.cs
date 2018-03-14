@@ -12,6 +12,7 @@ namespace DankBot
     class CommandManager
     {
         public static Dictionary<string, Func<SocketMessage, string[], string, Task>> commands = new Dictionary<string, Func<SocketMessage, string[], string, Task>>();
+        public static Dictionary<string, string> shortCommands = new Dictionary<string, string>();
 
         public static void LoadCommands()
         {
@@ -70,6 +71,17 @@ namespace DankBot
             commands.Add("LEET", MiscCommands.Leet);
             commands.Add("MOCK", MiscCommands.Mock);
             commands.Add("WHY", MiscCommands.Why);
+            commands.Add("CALCULATE", MiscCommands.Calculate);
+
+            // ============================ SHORT COMMANDS ============================
+
+            shortCommands.Add("G", "GOOGLE");
+            shortCommands.Add("YT", "YOUTUBE");
+            shortCommands.Add("SE", "SOUNDEFFECT");
+            shortCommands.Add("PL", "PLAYLIST");
+            shortCommands.Add("B64E", "B64ENCODE");
+            shortCommands.Add("B64D", "B64DECODE");
+            shortCommands.Add("CALC", "CALCULATE");
         }
 
         public static async Task MessageReceived(SocketMessage message)
@@ -101,6 +113,16 @@ namespace DankBot
                 string cmd = arg[0];
 
                 Func<SocketMessage, string[], string, Task> command;
+
+                string fullCommand = "";
+                shortCommands.TryGetValue(cmd.ToUpper(), out fullCommand);
+                if (fullCommand != null)
+                {
+                    msg = fullCommand + msg.Substring(cmd.Length);
+                    arg[0] = fullCommand;
+                    cmd = fullCommand;
+                }
+
                 commands.TryGetValue(cmd.ToUpper(), out command);
                 var type = message.Channel.EnterTypingState();
                 if (command != null)

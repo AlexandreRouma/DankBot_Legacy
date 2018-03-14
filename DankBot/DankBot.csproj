@@ -185,6 +185,15 @@
     <Reference Include="UrbanDictionnet, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Urbandictionary.1.5.0\lib\net452\UrbanDictionnet.dll</HintPath>
     </Reference>
+    <Reference Include="WeroSoft.Core.Library, Version=2.17.4.1, Culture=neutral, PublicKeyToken=39b6fa19703290ef, processorArchitecture=MSIL">
+      <HintPath>..\packages\WeroSoft.Expression.Library.2.17.4\lib\net45\WeroSoft.Core.Library.dll</HintPath>
+    </Reference>
+    <Reference Include="WeroSoft.Expressions.Library, Version=2.17.4.1, Culture=neutral, PublicKeyToken=39b6fa19703290ef, processorArchitecture=MSIL">
+      <HintPath>..\packages\WeroSoft.Expression.Library.2.17.4\lib\net45\WeroSoft.Expressions.Library.dll</HintPath>
+    </Reference>
+    <Reference Include="WeroSoft.Expressions.Operators.Library, Version=2.17.4.1, Culture=neutral, PublicKeyToken=39b6fa19703290ef, processorArchitecture=MSIL">
+      <HintPath>..\packages\WeroSoft.Expression.Library.2.17.4\lib\net45\WeroSoft.Expressions.Operators.Library.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdminCommands.cs" />
@@ -209,7 +218,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Documentation\Programming Guide Expression Library.pdf" />
     <None Include="packages.config" />
+    <None Include="WeroSoft.Expressions.Library.license">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="ReadmePleaseIfPossible.txt" />
