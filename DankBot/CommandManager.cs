@@ -108,6 +108,9 @@ namespace DankBot
                     coolDowns.Add(message.Author.Mention);
                     new Task(() => removeCooldown(message.Author.Mention)).Start();
                 }
+
+                Logger.WriteLine($"{message.Author.Username}#{message.Author.Discriminator} issued: \"{message.Content}\"");
+
                 string msg = message.Content.Substring(ConfigUtils.Configuration.Prefix.Length);
                 string[] arg = msg.Split(' ');
                 string cmd = arg[0];

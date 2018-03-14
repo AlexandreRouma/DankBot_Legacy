@@ -2,10 +2,11 @@
 using Discord.WebSocket;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WeroSoft.Expressions;
+using org.mariuszgromada.math.mxparser;
 
 namespace DankBot
 {
@@ -239,19 +240,8 @@ namespace DankBot
             {
                 try
                 {
-                    ExpressionManager expressionManager = new ExpressionManager();
-                    IExpression expression = new Expression(msg.Substring(10));
-                    expressionManager.EvaluateExpression(expression);
-                    int Result = (int)expression.Value;
-
-                    if (expression.Value != null)
-                    {
-                        await message.Channel.SendMessageAsync(Result.ToString());
-                    }
-                    else
-                    {
-                        await message.Channel.SendMessageAsync($":no_entry: `Could not evaluate expression` :computer:");
-                    }
+                    Expression e = new Expression(msg.Substring(10));
+                    await message.Channel.SendMessageAsync($"```{msg.Substring(10)} = {e.calculate()}```");
                 }
                 catch
                 {
