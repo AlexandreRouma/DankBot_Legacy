@@ -8,20 +8,11 @@ using Discord.WebSocket;
 using System.Threading;
 using System.IO;
 using System.Net;
-using System.Drawing;
-using System.Text.RegularExpressions;
-using UrbanDictionnet;
-using Google.Apis.YouTube.v3.Data;
-using QRCoder;
-using Tweetinvi;
-using Tweetinvi.Models;
-using System.Net.Http;
 
 namespace DankBot
 {
     class Program
     {
-        
 
         public static DiscordSocketClient client = new DiscordSocketClient();
 
@@ -32,7 +23,6 @@ namespace DankBot
 
         static async Task BotMain()
         {
-
             Logger.WriteLine("Welcome to DankBot !");
 
             if (!Directory.Exists(@"resources\config\"))

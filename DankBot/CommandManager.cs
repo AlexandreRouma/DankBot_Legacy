@@ -38,7 +38,7 @@ namespace DankBot
             commands.Add("SOUNDEFFECT", AudioCommands.Soundeffect);
 
             // Admin Commands
-            commands.Add("TURNOFF", AdminCommands.Stop);
+            commands.Add("SHUTDOWN", AdminCommands.Stop);
             commands.Add("SETGAME", AdminCommands.Setgame);
             commands.Add("SETPREFIX", AdminCommands.Setprefix);
             commands.Add("RELOAD", AdminCommands.Reload);
@@ -76,11 +76,18 @@ namespace DankBot
             // ============================ SHORT COMMANDS ============================
 
             shortCommands.Add("G", "GOOGLE");
+            shortCommands.Add("IMG", "IMAGE");
             shortCommands.Add("YT", "YOUTUBE");
+            shortCommands.Add("U", "URBAN");
+            shortCommands.Add("CMT", "COMMENT");
+            shortCommands.Add("LT", "LASTTWEET");
+            shortCommands.Add("RT", "RANDOMTWEET");
             shortCommands.Add("SE", "SOUNDEFFECT");
             shortCommands.Add("PL", "PLAYLIST");
             shortCommands.Add("B64E", "B64ENCODE");
             shortCommands.Add("B64D", "B64DECODE");
+            shortCommands.Add("ASTH", "AESTHETIC");
+            shortCommands.Add("EL", "ELIANS");
             shortCommands.Add("CALC", "CALCULATE");
         }
 
@@ -131,8 +138,20 @@ namespace DankBot
                 if (command != null)
                 {
                     Task awaiter = command(message, arg, msg);
-                    awaiter.GetAwaiter().OnCompleted(() => { type.Dispose(); });
-                    awaiter.Start();
+                    if (awaiter.IsCompleted)
+                    {
+                        type.Dispose();
+                    }
+                    else
+                    {
+                        awaiter.GetAwaiter().OnCompleted(() => {
+                            try
+                            {
+                                type.Dispose();
+                            }
+                            catch { }
+                        });
+                    }
                 }
                 else
                 {
