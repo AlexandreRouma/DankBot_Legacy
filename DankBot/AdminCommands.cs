@@ -3,6 +3,7 @@ using Discord.WebSocket;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -179,7 +180,9 @@ namespace DankBot
 
         public static async Task Ping(SocketMessage message, string[] arg, string msg)
         {
-            await message.Channel.SendMessageAsync("Skidaddle Skadoodle, your dick is now a noodle !");
+            Ping p = new Ping();
+            PingReply reply = p.Send("discordapp.com");
+            await message.Channel.SendMessageAsync($":white_check_mark: `{reply.RoundtripTime}ms`");
         }
 
         static Embed GenUser(SocketUser user)
